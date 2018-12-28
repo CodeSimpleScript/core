@@ -1,0 +1,5 @@
+s.include("/include.ssc")
+
+//Content
+t.page_title("Welcome")
+t.content("<p>This is a lot better then \"It works!\" is it not?</p>")

@@ -1,0 +1,6 @@
+s.include("/include.ssc")
+
+//Content
+t.page_title("How to use")
+t.content("<p>We have a fully working site setup as an example of how to use SimpleScript. For more information and how to examples visit our site at <a href=\"https://www.codesimplescript.com\">www.codesimplescript.com</a>.</p>")
+t.content("<p>SimpleScript has a dashboard located at <a href=\"/ss-admin\">/ss-admin</a> where you can see stats and also update the SimpleScript language to get new features in a few clicks. You will need to set a password in conf.json in the root folder.</p>")

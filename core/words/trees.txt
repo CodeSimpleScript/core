@@ -1,0 +1,134 @@
+almond
+apple
+apricot
+ash
+aspen
+baobob
+banyan
+bark
+beech
+black ash
+black willow
+bigtooth aspen
+birch
+bodhi
+bristlecone pine
+buckeye
+butternut
+cabbage palmetto
+camellia
+catalpa
+cedar
+cherry
+chestnut
+choke cherry
+coconut palm
+cone
+cottonwood
+crape myrtle
+crabapple
+cypress
+date
+dogwood
+Douglas fir
+elderberry
+elm
+eucalyptus
+evergreen
+fig
+filbert
+fir
+flame tree
+forest
+ginkgo
+goldenlarch
+grapefruit
+grove
+gum
+hackberry
+haw
+hawthorn
+hemlock
+hickory
+holly
+honeylocust
+ipil
+ironwood
+jack pine
+jacktree
+Japanese maple
+jujuba
+jungle
+juniper
+kapok tree
+katsura
+kukui nut
+kumquat
+larch
+lilac
+linden
+live oak
+loblolly pine
+locust
+loquat
+lone pine
+longleaf pine
+magnolia
+mahogany
+mangrove
+maple
+mimosa
+mountainash
+nectarine
+northern red oak
+Norway maple
+oak
+olive
+orange
+paper birch
+palm
+palmetto
+pawpaw
+peach
+pear
+pecan
+persimmon
+pine
+plum
+poplar
+quaking aspen
+quince
+rain forest
+redbud
+redwood
+rings
+rubber tree
+sassafras
+Scotch pine
+sequoia
+serviceberry
+silver maple
+Sitka spruce
+slippery elm
+spruce
+sugar maple
+sweetgum
+sycamore
+teak
+tree
+tulip-tree
+tupelo
+upright red maple
+viburnum
+walnut
+weeping willow
+white ash
+white oak
+white pine
+willow
+wingnut
+witchhazel
+yellowwood
+yew
+zebrawood
+zelkova

@@ -1,0 +1,11 @@
+//Set template file
+s.template("/template.html")
+
+//Basic site info for the template
+t.title("SimpleScript")
+t.description("A free and open source coding language anyone can learn")
+t.credits("&copy; SimpleScript, a open source project.")
+
+//Menu
+t.menu("<li><a href=\"/\">Welcome</a></li>")
+t.menu("<li><a href=\"/howto\">How to get started</a></li>")

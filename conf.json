@@ -1,0 +1,10 @@
+{
+	"location_code": "/www",
+	"location_database": "/data",
+	"location_logs": "/logs",
+	"settings_function_loopmax": 10000,
+	"settings_coredebug": false,
+	"admin_url": "/ss-admin",
+	"admin_password": "changeme",
+	"admin_email": "changeme@codesimplescript.com"
+}
