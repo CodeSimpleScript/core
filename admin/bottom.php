@@ -33,7 +33,6 @@
 											<span class="opener">Updates</span>
 											<ul>
 												<li><a href="<?php echo $settings["admin_url"]; ?>?page=update">Check for updates</a></li>
-												<li><a href="<?php echo $settings["admin_url"]; ?>?page=update_branch">Change update branch</a></li>
 											</ul>
 										</li>
 									</ul>
