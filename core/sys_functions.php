@@ -1227,6 +1227,86 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 				}
 			}
 
+			//-------------------------------------------------------------- FILE_UPLOADED_SAVE
+			if ($func=="file_image_resize" && $sandbox==false){
+				if (file_exists($system["runpath"].$code_part[0])){
+					$target_path=$system["runpath"].$code_part[0];
+					if (isset($code_part[2])){
+						if ($code_part[2]!=""){
+							$save_path=$system["runpath"].$code_part[2];
+						}else{
+							$save_path=$target_path;
+						}
+					}else{
+						$save_path=$target_path;
+					}
+					$realimage=false;
+					$imagetype="jpeg";
+					if (filesize($target_path) > 11){ //--Must check as images lower then 11 bytes dont give image type data
+						if (exif_imagetype($target_path)==IMAGETYPE_GIF){
+							$imagetype="gif";
+							$im=imagecreatefromgif($target_path);
+							$realimage=true;
+						}
+						if (exif_imagetype($target_path)==IMAGETYPE_JPEG){
+							$imagetype="jpeg";
+							$im=imagecreatefromjpeg($target_path);
+							$realimage=true;
+						}
+						if (exif_imagetype($target_path)==IMAGETYPE_PNG){
+							$imagetype="png";
+							$im=imagecreatefrompng($target_path);
+							$realimage=true;
+						}
+					}
+					if ($realimage==true){
+						//get image and convert
+						list($width, $height)=getimagesize($target_path);
+
+						$maxsize=$code_part[1];
+
+						// calculating the part of the image to use
+						if ($width > $maxsize){ $newwidth=$maxsize; $math=$width/$maxsize; $newheight=$height/$math; }else{ $newwidth=$width; $newheight=$height; }
+						if ($newheight > $maxsize){ $newheightr=$maxsize; $math=$newheight/$newheightr; $newheight=$newheightr; $newwidth=$newwidth/$math; }
+
+						// scaling down the image
+						$thumbSize = intval($code_part[1]);
+						$thumb = imagecreatetruecolor($newwidth, $newheight);
+						$backgroundColor=imagecolorallocate($thumb, 255, 255, 255); imagefill($thumb, 0, 0, $backgroundColor);
+						imagecopyresampled($thumb, $im, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+
+						//delete old file first
+						if (unlink($save_path)){
+
+							// save image to disk
+							if ($imagetype=="jpeg"){
+								imagejpeg($thumb, $save_path, 95);
+							}
+							if ($imagetype=="png"){
+								imagepng($thumb, $save_path);
+							}
+							if ($imagetype=="gif"){
+								imagegif($thumb, $save_path);
+							}
+
+							imagedestroy($thumb);
+							imagedestroy($tn);
+							imagedestroy($im);
+							return true;
+						}else{
+							imagedestroy($thumb);
+							imagedestroy($tn);
+							imagedestroy($im);
+							return false;
+						}
+					}else{
+						return false;
+					}
+				}else{
+					return false;
+				}
+			}
+
 			//-------------------------------------------------------------- FILE_COPY
 			if ($func=="file_copy" && $sandbox==false){
 				if (file_exists($system["runpath"].$code_part[0])){
