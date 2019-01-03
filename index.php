@@ -157,7 +157,6 @@
 		$d = str_replace("'","&#39;",$d);
 		$d = str_replace("<","&#60;",$d);
 		$d = str_replace(">","&#62;",$d);
-		$d = str_replace("`","&#96;",$d);
 		return $d;
 	}
 
