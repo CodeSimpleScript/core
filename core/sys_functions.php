@@ -70,6 +70,16 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 				return $_SERVER["REQUEST_URI"];
 			}
 
+			//-------------------------------------------------------------- SYSTEM_file
+			if ($func=="system_file"){
+				return $system["url"];
+			}
+
+			//-------------------------------------------------------------- SYSTEM_file
+			if ($func=="system_file_original"){
+				return $system["url_original"];
+			}
+
 			//-------------------------------------------------------------- SYSTEM_SLEEP_SECOND
 			if ($func=="system_sleep_second"){
 				sleep(intval($code));
