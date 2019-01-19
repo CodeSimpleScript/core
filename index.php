@@ -985,7 +985,7 @@ function array_merge_recursive_distinct($arr1, $arr2){
 				$system["url"].=".ssc";
 				$system["url_code"]=true;
 			}else{
-				$urlmath=trim($system["url_code"],"/");
+				$urlmath=trim($system["url"],"/");
 				$urltest=substr($urlmath, 0, strrpos( $urlmath, '/'));
 				$urltest="/".$urltest."/ssc_special_catchall.ssc";
 				header("ssCatchAll: ".$urltest."");
