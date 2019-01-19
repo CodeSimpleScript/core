@@ -1087,6 +1087,7 @@ function array_merge_recursive_distinct($arr1, $arr2){
 			if (file_exists($filedownload)){
 				if (is_dir($filedownload)){
 					echo "Sorry but you cant view the source of a DIR.";
+					header("Location: ".$system["url"]."/");
 				}else{
 					$type=mime_type($filedownload);
 					header("Content-Type: ".$type."");
