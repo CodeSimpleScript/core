@@ -1,1 +1,1 @@
-{ "message": "Added version ago function convert_timestamp_ago", "version": "0.5.2" }
+{ "message": "Fixes to the new ago function for strings", "version": "0.5.21" }

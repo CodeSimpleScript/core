@@ -344,11 +344,9 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 				$mi=substr($oldcode, 10, 2); //[2018][02][18][10][53]47
 				$s=substr($oldcode, 12, 2); //[2018][02][18][10][53][47]
 				$stringdate="$y-$m-$d $h:$mi:$s";
-				$timestampmake = strtotime($stringdate);
-				$datecode=date($code_part[0],$timestampmake);
 
 				$now = new DateTime;
-		    $ago = new DateTime($datetime);
+		    $ago = new DateTime($stringdate);
 		    $diff = $now->diff($ago);
 
 		    $diff->w = floor($diff->d / 7);
