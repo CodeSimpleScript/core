@@ -333,6 +333,52 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 				return date($code_part[0],$timestampmake);
 			}
 
+			//-------------------------------------------------------------- convert_timestamp_ago
+			if ($func=="convert_timestamp_ago"){
+				$oldcode=$code_part[0];
+				$full=$code_part[1];
+				$y=substr($oldcode, 0, 4); //[2018]0218105347
+				$m=substr($oldcode, 4, 2); //[2018][02]18105347
+				$d=substr($oldcode, 6, 2); //[2018][02][18]105347
+				$h=substr($oldcode, 8, 2); //[2018][02][18][10]5347
+				$mi=substr($oldcode, 10, 2); //[2018][02][18][10][53]47
+				$s=substr($oldcode, 12, 2); //[2018][02][18][10][53][47]
+				$stringdate="$y-$m-$d $h:$mi:$s";
+				$timestampmake = strtotime($stringdate);
+				$datecode=date($code_part[0],$timestampmake);
+
+				$now = new DateTime;
+		    $ago = new DateTime($datetime);
+		    $diff = $now->diff($ago);
+
+		    $diff->w = floor($diff->d / 7);
+		    $diff->d -= $diff->w * 7;
+
+		    $string = array(
+		        'y' => 'year',
+		        'm' => 'month',
+		        'w' => 'week',
+		        'd' => 'day',
+		        'h' => 'hour',
+		        'i' => 'minute',
+		        's' => 'second',
+		    );
+		    foreach ($string as $k => &$v) {
+		        if ($diff->$k) {
+		            $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
+		        } else {
+		            unset($string[$k]);
+		        }
+		    }
+
+				if (isset($full)){
+					if ($full=="true"){
+						$string = array_slice($string, 0, 1);
+					}
+				}
+		    return $string ? implode(', ', $string) . ' ago' : 'just now';
+			}
+
 			//-------------------------------------------------------------- covert_unix_timestamp
 			if ($func=="covert_unix_timestamp"){
 				return date('YmdHis',$code);
