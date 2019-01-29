@@ -1001,6 +1001,17 @@ function array_merge_recursive_distinct($arr1, $arr2){
 						$system["url_original"]=$system["url"];
 						$system["url"]=$urltest;
 						$system["url_code"]=true;
+					}else{
+						$urlmath=trim($system["url"],"/");
+						$urlmath=substr($urlmath, 0, strrpos( $urlmath, '/'));
+						$urltest=substr($urlmath, 0, strrpos( $urlmath, '/'));
+						$urltest=substr($urlmath, 0, strrpos( $urlmath, '/'));
+						$urltest="/".$urltest."/ssc_special_catchall.ssc";
+						if (file_exists(dirname(__FILE__).$settings["location_code"].$urltest)){
+							$system["url_original"]=$system["url"];
+							$system["url"]=$urltest;
+							$system["url_code"]=true;
+						}
 					}
 				}
 			}
