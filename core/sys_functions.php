@@ -396,6 +396,13 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 				return round($code);
 			}
 
+			//-------------------------------------------------------------- string_brokenhtml
+			if ($func=="string_brokenhtml"){
+				$doc = new DOMDocument();
+				@$doc->loadHTML($code);
+				return $doc->saveHTML();
+			}
+
 			//-------------------------------------------------------------- STRING_CLEAN
 			if ($func=="string_clean"){
 				$search = array(
