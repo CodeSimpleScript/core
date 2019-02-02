@@ -399,7 +399,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 			//-------------------------------------------------------------- string_brokenhtml
 			if ($func=="string_brokenhtml"){
 				$doc = new DOMDocument();
-				@$doc->loadHTML($code);
+				@$doc->loadHTML(mb_convert_encoding($code, 'HTML-ENTITIES', 'UTF-8'));
 				return $doc->saveHTML();
 			}
 
