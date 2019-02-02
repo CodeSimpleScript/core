@@ -1110,6 +1110,11 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 				return substr($code_part[0],0,$code_part[1]);
 			}
 
+			//-------------------------------------------------------------- STRING_TRIM
+			if ($func=="string_trim_utf8"){
+				return mb_substr($code_part[0],0,$code_part[1], "utf-8");
+			}
+
 			//-------------------------------------------------------------- STRING_FullTRIM
 			if ($func=="string_fulltrim"){
 				return trim($code_part[0],$code_part[1]);
