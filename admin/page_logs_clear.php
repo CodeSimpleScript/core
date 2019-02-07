@@ -29,6 +29,6 @@ logincheck();
       mkdir($system["location"].$settings["location_logs"], 0777, true);
     }
   }else{
-    echo '<h1>Do you really want to clear?</h1>Doing this will delete all files in the web log fodler folder, all changes and modifications will be removed. This will also delete the default website files.<BR><BR><a href="javascript:modl(\''.$settings["admin_url"].'?page=log_clear&ui_nostyle=true&clear=yes\');">Clear files</a>';
+    echo '<h1>Do you really want to clear?</h1>Doing this will delete all files in the web log fodler folder, all changes and modifications will be removed. This will also delete the default website files.<BR><BR><a href="javascript:modl(\''.$settings["admin_url"].'?page=logs_clear&ui_nostyle=true&clear=yes\');">Clear files</a>';
   }
 ?>
