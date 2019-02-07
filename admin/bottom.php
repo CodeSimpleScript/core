@@ -35,6 +35,12 @@
 												<li><a href="<?php echo $settings["admin_url"]; ?>?page=update">Check for updates</a></li>
 											</ul>
 										</li>
+										<li>
+											<span class="opener">Logs</span>
+											<ul>
+												<li><a href="<?php echo $settings["admin_url"]; ?>?page=logs_clear">Clear logs</a></li>
+											</ul>
+										</li>
 									</ul>
 								</nav>
 
