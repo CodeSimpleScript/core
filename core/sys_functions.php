@@ -90,6 +90,36 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 				usleep(((intval($code))*1000));
 			}
 
+			//-------------------------------------------------------------- SYSTEM_SLEEP_MS
+			if ($func=="service_pwnedpasswords"){
+				$passcheck=$code;
+
+				$hash = sha1($passcheck);
+				$first5 = substr($hash, 0, 5);
+				if ($first5 == "da39a"){ //First5 For SHA1 Blank Space
+					$first5 = null;
+				}
+				$lastbit = substr($hash, -35);
+				$hash = null;
+				$api = "https://api.pwnedpasswords.com/range/";
+				$url = $api . $first5;
+				$contents = file_get_contents($url);
+
+				//Check data
+				$rsuff = ":[0-9]{1,9}/mi";
+				$regex = "/" . $lastbit . $rsuff;
+				preg_match($regex, $contents, $matches);
+				$pwnedpass = ($matches[0]);
+				$numatch = "/:[0-9]{0,9}/mi";
+				preg_match($numatch, $pwnedpass, $matches);
+				$finmatch = substr($matches[0], 1);
+				if ($finmatch==0){
+					return "false";
+				}else{
+					return $finmatch;
+				}
+			}
+
 			//-------------------------------------------------------------- url_exist
 			if ($func=="url_exist"){
 				$ch = curl_init($code);
