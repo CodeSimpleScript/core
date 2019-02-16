@@ -1170,6 +1170,11 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 				return str_repeat($code_part[0],0,$code_part[1]);
 			}
 
+			//-------------------------------------------------------------- NUMBER_FORMAT
+			if ($func=="number_format"){
+				return number_format($code);
+			}
+
 			//-------------------------------------------------------------- FILE_UPLOADED
 			if ($func=="file_uploaded" && $sandbox==false){
 				if ($system["uploaded_file"]!=false){
