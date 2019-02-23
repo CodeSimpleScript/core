@@ -1933,10 +1933,19 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 				$title = $nodes->item(0)->nodeValue;
 				$outputarray["title"]=$title;
 
-				$metas = $doc->getElementsByTagName('meta');
+				$links = $doc->getElementsByTagName('link');
+				for ($i = 0; $i < $links->length; $i++){
+				  $link = $links->item($i);
+				  if($link->getAttribute('rel') == 'apple-touch-icon'){
+				    $outputarray["apple_icon"] = $link->getAttribute('href');
+					}
+					if($link->getAttribute('rel') == 'icon'){
+				    $outputarray["icon"] = $link->getAttribute('href');
+					}
+				}
 
-				for ($i = 0; $i < $metas->length; $i++)
-				{
+				$metas = $doc->getElementsByTagName('meta');
+				for ($i = 0; $i < $metas->length; $i++){
 				  $meta = $metas->item($i);
 				  if($meta->getAttribute('name') == 'description'){
 				    $outputarray["description"] = $meta->getAttribute('content');
