@@ -1944,19 +1944,22 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 				  if($meta->getAttribute('name') == 'keywords'){
 				  	$outputarray["keywords"] = $meta->getAttribute('content');
 					}
-					if($meta->getAttribute('name') == 'og:type'){
+					if($meta->getAttribute('property') == 'og:type'){
 				  	$outputarray["og_type"] = $meta->getAttribute('content');
 					}
-					if($meta->getAttribute('name') == 'og:title'){
+					if($meta->getAttribute('property') == 'og:title'){
 				  	$outputarray["og_title"] = $meta->getAttribute('content');
 					}
-					if($meta->getAttribute('name') == 'og:image'){
+					if($meta->getAttribute('property') == 'og:image'){
 				  	$outputarray["og_image"] = $meta->getAttribute('content');
 					}
-					if($meta->getAttribute('name') == 'og:description'){
+					if($meta->getAttribute('property') == 'og:logo'){
+				  	$outputarray["og_image"] = $meta->getAttribute('content');
+					}
+					if($meta->getAttribute('property') == 'og:description'){
 				  	$outputarray["og_description"] = $meta->getAttribute('content');
 					}
-					if($meta->getAttribute('name') == 'og:site_name'){
+					if($meta->getAttribute('property') == 'og:site_name'){
 				  	$outputarray["og_site_name"] = $meta->getAttribute('content');
 					}
 					if($meta->getAttribute('name') == 'twitter:site'){
@@ -1969,7 +1972,10 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 				  	$outputarray["twitter_description"] = $meta->getAttribute('content');
 					}
 					if($meta->getAttribute('name') == 'twitter:image:src'){
-				  	$outputarray["twitter_img_src"] = $meta->getAttribute('content');
+				  	$outputarray["twitter_img"] = $meta->getAttribute('content');
+					}
+					if($meta->getAttribute('name') == 'twitter:image'){
+				  	$outputarray["twitter_img"] = $meta->getAttribute('content');
 					}
 					if($meta->getAttribute('name') == 'twitter:card'){
 				  	$outputarray["twitter_card"] = $meta->getAttribute('content');
