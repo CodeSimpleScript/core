@@ -1992,6 +1992,9 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 					if($meta->getAttribute('name') == 'apple-touch-icon'){
 				  	$outputarray["apple_touch_icon"] = $meta->getAttribute('content');
 					}
+					if($meta->getAttribute('itemprop') == 'image'){
+				  	$outputarray["icon"] = $meta->getAttribute('content');
+					}
 				}
 
 				$obj=strtolower(codegenerate(50));
