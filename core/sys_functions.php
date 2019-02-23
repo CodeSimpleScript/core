@@ -1954,7 +1954,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 				  	$outputarray["og_image"] = $meta->getAttribute('content');
 					}
 					if($meta->getAttribute('property') == 'og:logo'){
-				  	$outputarray["og_image"] = $meta->getAttribute('content');
+				  	$outputarray["og_logo"] = $meta->getAttribute('content');
 					}
 					if($meta->getAttribute('property') == 'og:description'){
 				  	$outputarray["og_description"] = $meta->getAttribute('content');
