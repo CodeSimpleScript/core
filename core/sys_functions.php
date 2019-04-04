@@ -2232,16 +2232,18 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 
 				$apikey=$code_part[0];
 				$email_from=$code_part[1];
-				$email_to=$code_part[2];
-				$subject=$code_part[3];
-				$email_text=$code_part[4];
-				if (isset($code_part[5])){
-					$email_html=$code_part[5];
+				$email_from_name=$code_part[2];
+				$email_to=$code_part[3];
+				$subject=$code_part[4];
+				$email_text=$code_part[5];
+				if (isset($code_part[6])){
+					$email_html=$code_part[6];
 				}else{
-					$email_html=$code_part[4]."<BR><BR>This email does not have a HTML version at this time";
+					$email_html=$code_part[5]."<BR><BR>This email does not have a HTML version at this time";
 				}
 
-	      $postarray["content"]["from"]=$email_from;
+	      $postarray["content"]["from"]["name"]=$email_from_name;
+				$postarray["content"]["from"]["email"]=$email_from;
 	      $postarray["content"]["subject"]=$subject;
 	      $postarray["content"]["text"]=$email_text;
 	      $postarray["content"]["html"]=$email_html;
