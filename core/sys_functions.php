@@ -127,7 +127,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 						CURLOPT_RETURNTRANSFER => 1,
 						CURLOPT_URL => $code,
 						CURLOPT_USERAGENT => 'CodeSimpleScript SSC Script HTTP_REQUEST',
-						CURLOPT_FOLLOWLOCATION => true
+						CURLOPT_FOLLOWLOCATION => true,
 						CURLOPT_NOBODY => true
 				));
 		    curl_exec($ch);
