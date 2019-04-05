@@ -123,7 +123,13 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 			//-------------------------------------------------------------- url_exist
 			if ($func=="url_exist"){
 				$ch = curl_init($code);
-		    curl_setopt($ch, CURLOPT_NOBODY, true);
+				curl_setopt_array(ch, array(
+						CURLOPT_RETURNTRANSFER => 1,
+						CURLOPT_URL => $code,
+						CURLOPT_USERAGENT => 'CodeSimpleScript SSC Script HTTP_REQUEST',
+						CURLOPT_FOLLOWLOCATION => true
+						CURLOPT_NOBODY => true
+				));
 		    curl_exec($ch);
 		    $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
