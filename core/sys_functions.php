@@ -587,6 +587,8 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 						return "false";
 				}
 
+				$mysql_connections["".$mysql_table.""]->set_charset('utf8mb4');
+
 				if (!$mysql_connections["".$mysql_table.""]->options(MYSQLI_OPT_CONNECT_TIMEOUT, 3)) {
 				    log_error('Setting MYSQLI_OPT_CONNECT_TIMEOUT failed');
 						return "false";
@@ -594,7 +596,6 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 
 				//Connect to database now
 				$mysql_connections["".$mysql_table.""]->real_connect($code_part[0], $code_part[1], $code_part[2], $code_part[3]);
-				$mysql_connections["".$mysql_table.""]->set_charset('utf8mb4');
 
 				if ($mysql_connections["".$mysql_table.""]->connect_error) {
 					log_error("MYSQL CONNECT Error: ".$mysql_connections["".$mysql_table.""]->connect_error."", 0);
