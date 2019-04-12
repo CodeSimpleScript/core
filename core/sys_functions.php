@@ -596,7 +596,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 				$mysql_connections["".$mysql_table.""]->real_connect($code_part[0], $code_part[1], $code_part[2], $code_part[3]);
 
 				//mysqli_set_charset($mysql_connections["".$mysql_table.""],"utf8mb4");
-				$mysql_connections["".$mysql_table.""]->set_charset('utf8mb4');
+				$mysql_connections["".$mysql_table.""]->set_charset('utf8');
 
 				if ($mysql_connections["".$mysql_table.""]->connect_error) {
 					log_error("MYSQL CONNECT Error: ".$mysql_connections["".$mysql_table.""]->connect_error."", 0);
