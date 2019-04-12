@@ -799,7 +799,8 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 				$array2=ss_code_variables_string_value($id,$code_raw,true,false,$sandbox);
 				if ($array2!=false){
 					if (is_array($array2)){
-						return json_encode(utf8ize($array2), JSON_PRETTY_PRINT|JSON_NUMERIC_CHECK);
+						//return json_encode(utf8ize($array2), JSON_PRETTY_PRINT|JSON_NUMERIC_CHECK);
+						return json_encode($array2, JSON_PRETTY_PRINT|JSON_NUMERIC_CHECK);
 					}else{
 						return "false";
 					}
