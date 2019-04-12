@@ -1120,7 +1120,7 @@ function array_merge_recursive_distinct($arr1, $arr2){
 					header("Location: ".$system["url"]."/");
 				}else{
 					$type=mime_type($filedownload);
-					header("Content-Type: ".$type."");
+					header("Content-Type: ".$type."; charset=utf-8");
 					header('Expires: '.gmdate('D, d M Y H:i:s \G\M\T', time() + ((60 * 60)*25))); // 1 day
 					header('Cache-Control: must-revalidate');
 					header('Pragma: public');
@@ -1141,7 +1141,7 @@ function array_merge_recursive_distinct($arr1, $arr2){
 			}else{
 				$filedownload=str_replace($settings["admin_url"], "", $system["url"]);
 				$type=mime_type("admin/".$filedownload);
-				header("Content-Type: ".$type."");
+				header("Content-Type: ".$type."; charset=utf-8");
 				header('Expires: 0');
 				header('Cache-Control: must-revalidate');
 				header('Pragma: public');

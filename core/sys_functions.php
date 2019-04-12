@@ -771,7 +771,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 								$array[]=$row;
 							}
 						}
-						$array=utf8ize($array);
+						//$array=utf8ize($array);
 						$obj=strtolower(codegenerate(50));
 						convert_phparray_ssarray($id,$array,$obj);
 						return "v.".$obj."";
