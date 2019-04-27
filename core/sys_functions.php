@@ -2021,7 +2021,9 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 						CURLOPT_RETURNTRANSFER => 1,
 						CURLOPT_URL => $code_part[0],
 						CURLOPT_USERAGENT => 'CodeSimpleScript SSC Script HTTP_REQUEST',
-						CURLOPT_FOLLOWLOCATION => true
+						CURLOPT_FOLLOWLOCATION => true,
+						CURLOPT_CONNECTTIMEOUT => 10,
+						CURLOPT_TIMEOUT => 10
 				));
 				// Send the request & save response to $resp
 				$resp = curl_exec($curl);
