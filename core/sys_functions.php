@@ -707,8 +707,12 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 					if ($mysql_connections["".$mysql_table.""]->query($code_part[0]) === TRUE) {
 						return $mysql_connections["".$mysql_table.""]->insert_id;
 					}else{
-						log_error("MYSQL UPDATE Error: ".$mysql->error." | ".$code_part[0]."", 0);
-						return "false";
+						if ($mysql->error!=""){
+							log_error("MYSQL UPDATE Error: ".$mysql->error." | ".$code_part[0]."", 0);
+							return "false";
+						}else{
+							return "true";
+						}
 					}
 				}else{
 					return "false";
