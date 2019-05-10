@@ -10,16 +10,18 @@
 		<!--[if lte IE 8]><link rel="stylesheet" href="<?php echo $settings["admin_url"]; ?>/assets/css/ie8.css" /><![endif]-->
 		<style>
 			  .modl_case{
-	background:rgba(32,34,46,0.9);
+	background:rgba(255,255,255,0.9);
 	z-index: 8000;
 	position: fixed;
 	top: 0px;
 	left: 0px;
 	width: 100%;
 	height: 100%;
-    color:#ffffff;
+    color:#555555;
     text-align:center;
 }
+
+.form-group{margin-top:10px;margin-bottom:10px;}
 
 .modl_frame{
 	overflow: auto;
@@ -38,7 +40,7 @@
 }
 
   .modl_case *{
-    color:#ffffff;
+    color:#555555;
   }
 
 .modl_frame.wide{
@@ -61,7 +63,7 @@
 	margin-left:-100px;
 	text-align:center;
 	padding:10px;
-	background:rgba(117,83,226,0.9);
+	background:#f56a6a;
 	color:#ffffff;
 	z-index:100;
 }
