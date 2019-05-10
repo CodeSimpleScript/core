@@ -2,7 +2,7 @@
 
 logincheck();
 echo '<div class="form-header"><h1>Github Packages</h1></div><div class="form-content">';
-echo '<div class="form-group">Github packages allows you to easily install packages and files from a Github repository and keep them updated. All packages you add will be installed in your website folder (default /www). If you need to reset the web dir files at any point to fix broken installs or remove the default site <a href="javascript:modl(\''.$settings["admin_url"].'?page=site_github_dirclear&ui_nostyle=true&clear=ask\');">click here</a>.</div>';
+echo '<div class="form-group">Github packages allows you to easily install packages and files from a Github repository and keep them updated. All packages you add will be installed in your website folder (default /www). If you need to reset the web dir files at any point to fix broken installs or remove the default site <a href="javascript:modl(\''.$settings["admin_url"].'?page=site_github_dirclear&ui_nostyle=true&clear=ask\');">click here</a>.</div><BR><BR>';
 
 $packages=0;
 
@@ -34,10 +34,10 @@ if (isset($system_data["gitgub_packages"])){
 }
 
 if ($packages==0){
-  echo '<div class="form-group"><div style="background:rgb(231,76,60);color:#ffffff;padding:5px;margin-top:5px;margin-bottom:5px;border-radius:2px;">You have no packages yet, install one below first.</div></div>'; 
+  echo '<div class="form-group"><div style="background:rgb(231,76,60);color:#ffffff;padding:5px;margin-top:5px;margin-bottom:5px;border-radius:2px;">You have no packages yet, install one below first.</div></div>';
 }
 
-echo '<form action="'.$settings["admin_url"].'?page=site_github" method="post"><div class="form-group"><h1>Install new package</h1><label>Github Package (codesimplescript/website)</label><input type="text" id="package" name="package" required="required" /></div><div class="form-group"><button type="submit">Install</button></div></form>';
+echo '<form action="'.$settings["admin_url"].'?page=site_github" method="post"><div class="form-group"><h3>Install new package</h3><label>Github Package (codesimplescript/website)</label><input type="text" id="package" name="package" required="required" /></div><div class="form-group"><button type="submit">Install</button></div></form>';
 
 if (isset($_POST["package"])){
   echo '<script>window.setTimeout(function(){ modl(\''.$settings["admin_url"].'?page=site_github_install&ui_nostyle=true&package='.makesafe($_POST["package"]).'\'); }, 1000);</script>';

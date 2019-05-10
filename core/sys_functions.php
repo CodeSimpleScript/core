@@ -32,6 +32,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 			if ($system["debug"]==true){ $system["debug_log"].="\r\n> Run Function S - ".$func." | ".$t.""; }
 
 			//-------------------------------------------------------------- ECHO
+			//DOC: https://codewithss.org/documentation?page=system-functions%2Fs.echo.md
 			if ($func=="echo"){
 				return $code;
 			}
@@ -205,6 +206,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 			}
 
 			//-------------------------------------------------------------- COOKIE_SET
+			//DOC: https://codewithss.org/documentation?page=system-functions%2Fs.cookie_set.md
 			if ($func=="cookie_set" && $sandbox==false){
 				if (!isset($code_part[3])){
 					$code_part[3]="/";
@@ -214,11 +216,13 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 			}
 
 			//-------------------------------------------------------------- COOKIE_DELETE
+			//DOC: https://codewithss.org/documentation?page=system-functions%2Fs.cookie_delete.md
 			if ($func=="cookie_delete" && $sandbox==false){
 				setcookie($code, "", time() - 3600);
 			}
 
 			//-------------------------------------------------------------- HEADER
+			//DOC: https://codewithss.org/documentation?page=system-functions%2Fs.header.md
 			if ($func=="header" && $sandbox==false){
 				header(''.$code.'');
 			}
@@ -799,6 +803,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 			}
 
 			//-------------------------------------------------------------- JSON_ENCODE - usage s.json_encode(arrayvar)
+			//DOC: https://codewithss.org/documentation?page=system-functions%2Fs.json_encode.md
 			if ($func=="json_encode"){
 				$array2=ss_code_variables_string_value($id,$code_raw,true,false,$sandbox);
 				if ($array2!=false){
@@ -814,6 +819,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 			}
 
 			//-------------------------------------------------------------- JSON_DECODE - usage s.json_decode(jsonstring)
+			//DOC: https://codewithss.org/documentation?page=system-functions%2Fs.json_decode.md
 			if ($func=="json_decode"){
 				$obj=strtolower(codegenerate(50));
 				$json_obj=json_decode($code, true);
@@ -825,7 +831,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 				}
 			}
 
-			//-------------------------------------------------------------- JSON_DECODE - usage s.json_decode(jsonstring)
+			//-------------------------------------------------------------- JSON_DECODE
 			if ($func=="json_decode_reverse"){
 				$obj=strtolower(codegenerate(50));
 				$json_obj=json_decode($code, true);
@@ -896,6 +902,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 			}
 
 			//-------------------------------------------------------------- format_phonenumber
+			//DOC: https://codewithss.org/documentation?page=system-functions%2Fs.format_phonenumber.md
 			if ($func=="format_phonenumber"){
 				$phone = preg_replace("/[^0-9]/", "", $code);
  				if(strlen($phone) == 7){
@@ -927,6 +934,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 			}
 
 			//-------------------------------------------------------------- CHECK_VALID_EMAIL
+			//DOC: https://codewithss.org/documentation?page=system-functions%2Fs.check_valid_email.md
 			if ($func=="check_valid_email"){
 				if (filter_var($code, FILTER_VALIDATE_EMAIL)) {
 					return "true";
@@ -936,6 +944,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 			}
 
 			//-------------------------------------------------------------- CHECK_VALID_URL
+			//DOC: https://codewithss.org/documentation?page=system-functions%2Fs.check_valid_url.md
 			if ($func=="check_valid_url"){
 				$var=filter_var($code, FILTER_VALIDATE_URL);
 				if ($var==true){
@@ -1423,6 +1432,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 			}
 
 			//-------------------------------------------------------------- FILE_COPY
+			//DOC: https://codewithss.org/documentation?page=system-functions%2Fs.file_copy.md
 			if ($func=="file_copy" && $sandbox==false){
 				if (file_exists($system["runpath"].$code_part[0])){
 					if (!is_dir($system["runpath"].$code_part[0])){
@@ -1443,6 +1453,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 			}
 
 			//-------------------------------------------------------------- FILE_EXISTS
+			//DOC: https://codewithss.org/documentation?page=system-functions%2Fs.file_exists.md
 			if ($func=="file_exists" && $sandbox==false){
 				if (file_exists($system["runpath"].$code_part[0])){
 					if (!is_dir($system["runpath"].$code_part[0])){
@@ -1467,6 +1478,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 			}
 
 			//-------------------------------------------------------------- FILE_DELETE
+			//DOC: https://codewithss.org/documentation?page=system-functions%2Fs.file_delete.md
 			if ($func=="file_delete" && $sandbox==false){
 				if (file_exists($system["runpath"].$code_part[0])){
 					if (!is_dir($system["runpath"].$code_part[0])){
@@ -1487,6 +1499,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 			}
 
 			//-------------------------------------------------------------- FILE_WRITE
+			//DOC: https://codewithss.org/documentation?page=system-functions%2Fs.file_write.md
 			if ($func=="file_write" && $sandbox==false){
 				if (file_exists($system["runpath"].$code_part[0])){
 					if (!is_dir($system["runpath"].$code_part[0])){
@@ -1507,6 +1520,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 			}
 
 			//-------------------------------------------------------------- FILE_ADD
+			//DOC: https://codewithss.org/documentation?page=system-functions%2Fs.file_add.md
 			if ($func=="file_add" && $sandbox==false){
 				if (file_exists($system["runpath"].$code_part[0])){
 					if (!is_dir($system["runpath"].$code_part[0])){
@@ -1527,6 +1541,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 			}
 
 			//-------------------------------------------------------------- FILE_CREATE
+			//DOC: https://codewithss.org/documentation?page=system-functions%2Fs.file_create.md
 			if ($func=="file_create" && $sandbox==false){
 				if (!file_exists($system["runpath"].$code_part[0])){
 					$file = fopen($system["runpath"].$code_part[0], 'w') or log_error("System Function (file_create): file create failed",$t);
@@ -1539,6 +1554,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 			}
 
 			//-------------------------------------------------------------- FILE_READ
+			//DOC: https://codewithss.org/documentation?page=system-functions%2Fs.file_read.md
 			if ($func=="file_read" && $sandbox==false){
 				if (file_exists($system["runpath"].$code_part[0])){
 					if (!is_dir($system["runpath"].$code_part[0])){
@@ -1657,6 +1673,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 			}
 
 			//-------------------------------------------------------------- FILE_SIZE
+			//DOC: https://codewithss.org/documentation?page=system-functions%2Fs.file_size.md
 			if ($func=="file_size" && $sandbox==false){
 				if (file_exists($system["runpath"].$code_part[0])){
 					if (!is_dir($system["runpath"].$code_part[0])){
@@ -1673,6 +1690,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 			}
 
 			//-------------------------------------------------------------- FILE_RENAME
+			//DOC: https://codewithss.org/documentation?page=system-functions%2Fs.file_rename.md
 			if ($func=="file_rename" && $sandbox==false){
 				if (file_exists($system["runpath"].$code_part[0])){
 					if (!is_dir($system["runpath"].$code_part[0])){
@@ -1698,6 +1716,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 			}
 
 			//-------------------------------------------------------------- FOLDER_DELETE
+			//DOC: https://codewithss.org/documentation?page=system-functions%2Fs.folder_delete.md
 			if ($func=="folder_delete" && $sandbox==false){
 				if (file_exists($system["runpath"].$code_part[0])){
 					if (is_dir($system["runpath"].$code_part[0])){
@@ -1718,6 +1737,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 			}
 
 			//-------------------------------------------------------------- FOLDER_CREATE
+			//DOC: https://codewithss.org/documentation?page=system-functions%2Fs.folder_create.md
 			if ($func=="folder_create" && $sandbox==false){
 				if (!file_exists($system["runpath"].$code_part[0])){
 					if (!is_dir($system["runpath"].$code_part[0])){
@@ -1738,6 +1758,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 			}
 
 			//-------------------------------------------------------------- FOLDER_RENAME
+			//DOC: https://codewithss.org/documentation?page=system-functions%2Fs.folder_rename.md
 			if ($func=="folder_rename" && $sandbox==false){
 				if (file_exists($system["runpath"].$code_part[0])){
 					if (is_dir($system["runpath"].$code_part[0])){
@@ -1763,6 +1784,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 			}
 
 			//-------------------------------------------------------------- FOLDER_EXISTS
+			//DOC: https://codewithss.org/documentation?page=system-functions%2Fs.folder_exists.md
 			if ($func=="folder_exists" && $sandbox==false){
 				if (file_exists($system["runpath"].$code_part[0])){
 					if (is_dir($system["runpath"].$code_part[0])){
@@ -1776,6 +1798,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 			}
 
 			//-------------------------------------------------------------- FOLDER_CONTENT
+			//DOC: https://codewithss.org/documentation?page=system-functions%2Fs.folder_content.md
 			if ($func=="folder_content" && $sandbox==false){
 				if (file_exists($system["runpath"].$code_part[0])){
 					if (is_dir($system["runpath"].$code_part[0])){
@@ -2017,6 +2040,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 			}
 
 			//-------------------------------------------------------------- HTTP_REQUEST_GET
+			//DOC: https://codewithss.org/documentation?page=system-functions%2Fs.http_request_get.md
 			if ($func=="http_request_get"){
 				// Get cURL resource
 				$curl = curl_init();
