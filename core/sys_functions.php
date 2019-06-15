@@ -2321,7 +2321,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 			//-------------------------------------------------------------- QUIT
 			if ($func=="quit" && $sandbox==false){
 				shutdown(); //shutdown systme before we die
-				die();
+				die($code);
 			}
 
 			//######################################################################
