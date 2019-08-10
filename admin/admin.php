@@ -6,6 +6,8 @@ if (!isset($settings["admin_authtoken"])){
   $settings_update=true;
 }
 
+include("admin/functions.php");
+
 //Call home our key so we know we can be used
 $domain=str_replace("www.", "", $_SERVER['HTTP_HOST']);
 $checkin=get_contents("https://codewithss.org/api/instance_callhome?domain=".$domain."&authtoken=".$settings["admin_authtoken"]."");

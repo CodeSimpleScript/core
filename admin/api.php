@@ -6,8 +6,6 @@ $response["data"]=[];
 
 $domain=str_replace("www.", "", $_SERVER['HTTP_HOST']);
 
-include("functions.php");
-
 if (isset($_GET["command"])){
   if (canmakechange()==true){
 
