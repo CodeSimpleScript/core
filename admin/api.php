@@ -34,6 +34,8 @@ if (isset($_GET["command"])){
       }
     }
 
+  }else{
+    $response["fail"]="authfail";
   }
 }
 
