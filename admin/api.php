@@ -29,7 +29,7 @@ if (isset($_GET["command"])){
         if (isset($system_data["version"])){ unset($system_data["version"]); }
         $system_data["core_version"]=$data["version"];
         $system_data_update=true;
-        $response=get_contents("http://".$domain."/ss-run.php?zip=".urlencode("https://github.com/CodeSimpleScript/core/archive/master.zip")."";
+        $response=get_contents("http://".$domain."/ss-run.php?zip=".urlencode("https://github.com/CodeSimpleScript/core/archive/master.zip")."");
         $response["data"]["update"]=$response;
       }
     }

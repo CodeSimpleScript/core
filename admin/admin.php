@@ -23,7 +23,7 @@ if (!isset($_GET["command"])){
 
   include("admin/top.php");
   echo '<style>.inner{ max-width: 600px !important; }</style>';
-  echo '<div class="form-header"><h3>Connect Code</h3></div><div class="form-content">To setup this new instance and control it\'s updates and more go to http://codewithss.org/connect and enter the code below to connect with your account.';
+  echo '<div class="form-header"><h3>Connect Code</h3></div><div class="form-content">To setup this new instance and control it\'s updates and more go to http://codewithss.org/connect and enter the code below to connect with your account.<BR><BR>';
   echo '<pre><code>'.$settings["admin_authtoken"].'</code></pre>';
   echo '</div>';
   include("admin/bottom.php");
