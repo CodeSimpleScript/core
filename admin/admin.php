@@ -1,10 +1,11 @@
 <?php
 //token is not set yet so we will make it
 if (!isset($settings["admin_authtoken"])){
-  $settings["admin_authtoken"]=codegenerate(80);
-  $settings["admin_password"]="falsenow";
-  $settings_update=true;
+  $settings["admin_authtoken"]=codegenerate(60);
 }
+
+$settings["admin_password"]="authdonesetupdone";
+$settings_update=true;
 
 include("admin/functions.php");
 
@@ -22,7 +23,7 @@ if (!isset($_GET["command"])){
 
   include("admin/top.php");
   echo '<style>.inner{ max-width: 600px !important; }</style>';
-  echo '<div class="form-header"><h3>Connect Code</h3></div><div class="form-content">';
+  echo '<div class="form-header"><h3>Connect Code</h3></div><div class="form-content">To setup this new instance and control it\'s updates and more go to http://codewithss.org/connect and enter the code below to connect with your account.';
   echo '<pre><code>'.$settings["admin_authtoken"].'</code></pre>';
   echo '</div>';
   include("admin/bottom.php");

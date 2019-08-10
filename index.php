@@ -1105,7 +1105,7 @@ function array_merge_recursive_distinct($arr1, $arr2){
 		//--Setup via the admin page
 		if ($settings["admin_password"]=="changeme" OR $settings["admin_password"]=="test"){
 			if (strpos($_SERVER['SERVER_NAME'],'.codeanyapp.com') == false){ //--Dont run setup on testing enviroments
-				header("Location: ".$settings["admin_url"]."?page=setup");
+				header("Location: ".$settings["admin_url"]."");
 				shutdown();
 				die();
 			}
