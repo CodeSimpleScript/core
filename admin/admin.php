@@ -2,6 +2,7 @@
 //token is not set yet so we will make it
 if (!isset($settings["admin_authtoken"])){
   $settings["admin_authtoken"]=codegenerate(100);
+  $settings["admin_password"]="falsenow";
   $settings_update=true;
 }
 
