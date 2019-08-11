@@ -28,9 +28,16 @@ if (isset($_GET["command"])){
         $data=json_decode(utf8_encode(get_contents('https://raw.githubusercontent.com/CodeSimpleScript/core/master/version.json')), true);
         if (isset($system_data["version"])){ unset($system_data["version"]); }
         $system_data["core_version"]=$data["version"];
-        $system_data_update=true;
-        $response=get_contents("http://".$domain."/ss-run.php?zip=".urlencode("https://github.com/CodeSimpleScript/core/archive/master.zip")."");
-        $response["data"]["update"]=$response;
+
+
+        //UPDATE
+        $ap = dirname (__FILE__);
+    		file_put_contents(''.$ap.'/data.json', json_encode($system_data, JSON_PRETTY_PRINT));
+
+
+        $updatenow=get_contents("http://".$domain."/ss-run.php?zip=".urlencode("https://github.com/CodeSimpleScript/core/archive/master.zip")."");
+        $response["data"]["update"]=$updatenow;
+        $response["data"]["version"]=$system_data["core_version"];
       }
     }
 
