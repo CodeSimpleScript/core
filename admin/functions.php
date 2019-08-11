@@ -33,7 +33,7 @@ function logincheck(){
 function canmakechange(){
   global $settings;
 	$proxcode=$settings["admin_authtoken"];
-	$oldtoken = !empty($_GET["authtoken"]) ? strtolower($_GET["authtoken"]) : false;
+	$oldtoken = !empty($_GET["authtoken"]) ? $_GET["authtoken"] : false;
 	if ($oldtoken==$proxcode){
 		return true;
 	}else{
