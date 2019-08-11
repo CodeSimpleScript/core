@@ -22,10 +22,19 @@ if (isset($_GET["command"])){
 if (!isset($_GET["command"])){
 
   include("admin/top.php");
-  echo '<style>.inner{ max-width: 600px !important; }</style>';
-  echo '<div class="form-header"><h3>Connect Code</h3></div><div class="form-content">To setup this new instance and control it\'s updates and more go to <a href=\'http://codewithss.org/connect\' target=\'_new\'>http://codewithss.org/connect</a> and enter the code below to connect with your account.<BR><BR>';
-  echo '<pre><code>'.$settings["admin_authtoken"].'</code></pre>';
-  echo '</div>';
+
+  $checkin=get_contents("https://codewithss.org/api/instance_setupfinished?authtoken=".$settings["admin_authtoken"]."");
+  if ($checkin=="false"){
+    echo '<style>.inner{ max-width: 600px !important; }</style>';
+    echo '<div class="form-header"><h3>Connect Code</h3></div><div class="form-content">To setup this new instance and control it\'s updates and more go to <a href=\'https://codewithss.org/connect\' target=\'_new\'>https://codewithss.org/connect</a> and enter the code below to connect with your account.<BR><BR>';
+    echo '<pre><code>'.$settings["admin_authtoken"].'</code></pre>';
+    echo '</div>';
+  }else{
+    echo '<style>.inner{ max-width: 600px !important; }</style>';
+    echo '<div class="form-header"><h3>All setup</h3></div><div class="form-content">You are all setup. You can manage your site install via your account on a href=\'https://codewithss.org\' target=\'_new\'>https://codewithss.org</a>';
+    echo '</div>';
+  }
+
   include("admin/bottom.php");
 
 }
