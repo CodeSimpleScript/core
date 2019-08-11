@@ -31,7 +31,7 @@ if (!isset($_GET["command"])){
     echo '</div>';
   }else{
     echo '<style>.inner{ max-width: 600px !important; }</style>';
-    echo '<div class="form-header"><h3>All setup</h3></div><div class="form-content">You are all setup. You can manage your site install via your account on a href=\'https://codewithss.org\' target=\'_new\'>https://codewithss.org</a>';
+    echo '<div class="form-header"><h3>All setup</h3></div><div class="form-content">You are all setup. You can manage your site install via your account on <a href=\'https://codewithss.org\' target=\'_new\'>https://codewithss.org</a>';
     echo '</div>';
   }
 
