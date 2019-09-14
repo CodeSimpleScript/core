@@ -262,6 +262,12 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 				return codegenerate($code);
 			}
 
+			//-------------------------------------------------------------- request_body
+			if ($func=="request_body" && $sandbox==false){
+				$body = @file_get_contents('php://input');
+				return $body;
+			}
+
 			//-------------------------------------------------------------- RANDOM_STRING_PHRASE
 			if ($func=="random_string_phrase"){
 
