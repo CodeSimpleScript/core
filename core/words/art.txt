@@ -7,7 +7,7 @@ art
 art gallery
 artist
 artistic
-artist's bridge
+artists bridge
 artwork
 assemblage
 bas-relief
@@ -106,7 +106,7 @@ model
 mosaic
 mural
 museum
-objects d'art
+objects dart
 oil paint
 old master
 op art
@@ -167,7 +167,7 @@ textile arts
 tole painting
 tone
 tools
-trompe l'oeil
+trompe loeil
 t-square
 tube
 turpentine

@@ -46,7 +46,7 @@ Corporate
 Cosmic
 Crazy
 Creepy
-Cthulhu's
+Cthulhus
 Custom
 Cyber
 Cybernetic
@@ -139,7 +139,7 @@ Kabuki
 Kamikaze
 Killer
 Kinect
-Kirby's
+Kirbys
 Kosher
 Kung-fu
 Latino
@@ -610,7 +610,7 @@ Chronicles
 City
 Co-Op
 Collection
-collector's Edition
+collectors Edition
 College
 Colosseum
 Combat

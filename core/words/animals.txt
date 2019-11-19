@@ -182,10 +182,10 @@ cuttlefish
 cutworm
 Dachshund
 dall sheep
-Dall's porpoise
+Dall
 Dalmatian
 dark-eyed junco
-damselfly 
+damselfly
 darkling beetle
 deer
 Deinonychus
@@ -443,7 +443,7 @@ mammoth
 manatee
 mandrill
 mamba
-man-o'-war
+man-o-war
 manta ray
 mantid
 mantis
@@ -588,7 +588,7 @@ python
 Quaesitosaurus
 quagga
 quail
-Queen Alexandra's birdwing
+Queen Alexandras birdwing
 queen conch
 quetzal
 quokka

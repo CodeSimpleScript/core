@@ -13,7 +13,7 @@ astronomy
 axial tilt
 azimuth
 background radiation
-Bailey's beads
+Baileys beads
 big bang theory
 binary star
 black body
@@ -81,7 +81,7 @@ hydrogen
 helium
 H-R diagram
 Hubble telescope
-Hubble's law
+Hubbles law
 hyperbolic orbit
 hypernova
 ice giant
@@ -93,7 +93,7 @@ interstellar
 interstellar dust
 ionosphere
 Jupiter
-Kepler's laws
+Keplers laws
 kiloparsec
 Kirkwood gaps
 Kuiper belt
