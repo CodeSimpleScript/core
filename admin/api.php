@@ -33,7 +33,7 @@ if (isset($_GET["command"])){
         $response["data"]["update"]=$updatenow;
         $response["data"]["version"]=$data["version"];
 
-        if ($updatenow=="good"){
+        if ($updatenow=="done"){
           $system_data_update=true;
           $system_data["core_version"]=$data["version"];
           $ap=dirname(dirname(__FILE__));
