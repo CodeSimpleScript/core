@@ -29,6 +29,23 @@
     $source = urldecode($_GET["zip"]."?version=".time()."");
     $dest = "ss-update-package.zip";
     copy($source, $dest);
+
+    $options  = array('http' => array('user_agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.2 Safari/605.1.15'));
+    $context  = stream_context_create($options);
+    $response = file_get_contents($source, false, $context);
+    if($response === false){
+      nhlog("Download failed");
+      die("error");
+    }
+    $save = file_put_contents($dest, $response);
+    if($save === false){
+      nhlog("Save failed");
+      die("error");
+    }
+
+
+$file = file_get_contents('https://www.example.com/', false, stream_context_create($opts));
+
   }
 
 	$path = 'ss-update-package.zip';
