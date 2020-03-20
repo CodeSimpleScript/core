@@ -36,6 +36,8 @@ if (isset($_GET["command"])){
         if ($updatenow=="good"){
           $system_data_update=true;
           $system_data["core_version"]=$data["version"];
+          $ap=dirname(dirname(__FILE__));
+          file_put_contents(''.$ap.'/data.json', json_encode($system_data, JSON_PRETTY_PRINT));
         }
 
       }
