@@ -1,1 +1,1 @@
-{ "message": "Fixed update script, may need to update /admin/functions.php manualy on your install", "version": "0.5.26" }
+{ "message": "Migration codes added, may need to update /admin/functions.php manualy on your install", "version": "0.5.27" }
