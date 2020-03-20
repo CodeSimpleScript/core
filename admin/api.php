@@ -2,6 +2,7 @@
 
 $response=[];
 $response["alive"]=true;
+$response["core_migration"]="2";
 $response["data"]=[];
 
 $domain=str_replace("www.", "", $_SERVER['HTTP_HOST']);
