@@ -2,7 +2,6 @@
 
 $response=[];
 $response["alive"]=true;
-$response["core_migration"]="2";
 $response["data"]=[];
 
 $domain=str_replace("www.", "", $_SERVER['HTTP_HOST']);
@@ -19,6 +18,7 @@ if (isset($_GET["command"])){
         $response["data"]["https"]=false;
       }
       $response["data"]["version"]=$system_data["core_version"];
+      $response["data"]["migration"]="2";
     }
 
     if ($_GET["command"]=="update"){
