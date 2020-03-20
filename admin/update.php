@@ -34,18 +34,18 @@
     $context  = stream_context_create($options);
     $response = file_get_contents($source, false, $context);
     if($response === false){
-      nhlog("Download failed");
+      nhlog("Download failed $source");
       die("error");
     }
     $save = file_put_contents($dest, $response);
     if($save === false){
-      nhlog("Save failed");
+      nhlog("Save failed $source");
       die("error");
     }
 
-
-$file = file_get_contents('https://www.example.com/', false, stream_context_create($opts));
-
+  }else{
+    nhlog("No source fail");
+    die("error");
   }
 
 	$path = 'ss-update-package.zip';

@@ -41,8 +41,8 @@ function canmakechange(){
 	}
 }
 
-function get_contents($url, $ua = 'Mozilla/5.0 (Windows NT 5.1; rv:2.0.1) Gecko/20100101 Firefox/4.0.1', $referer = 'http://www.google.com/') {
-  if (function_exists('curl_exec')) {
+function get_contents($url, $ua='Mozilla/5.0 (Windows NT 5.1; rv:2.0.1) Gecko/20100101 Firefox/4.0.1', $referer='http://www.google.com/'){
+  if (function_exists('curl_exec')){
     $header[0] = "Accept-Language: en-us,en;q=0.5";
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_URL, $url);
@@ -50,12 +50,15 @@ function get_contents($url, $ua = 'Mozilla/5.0 (Windows NT 5.1; rv:2.0.1) Gecko/
     curl_setopt($curl, CURLOPT_REFERER, $referer);
     curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
     curl_setopt($curl, CURLOPT_TIMEOUT, 10);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
     $content = curl_exec($curl);
     curl_close($curl);
-  }
-  else {
-    $content = file_get_contents($url);
+  }else{
+    $options=array('http' => array('user_agent' => $ua));
+    $context=stream_context_create($options);
+    $content=file_get_contents($url, false, $context);
   }
   return $content;
 }
