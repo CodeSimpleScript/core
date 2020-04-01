@@ -1,1 +1,1 @@
-{ "message": "Migration codes added, may need to update /admin/functions.php manualy on your install", "version": "0.5.27" }
+{ "message": "New version with SFTP details", "version": "0.5.28" }

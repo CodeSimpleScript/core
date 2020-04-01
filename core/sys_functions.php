@@ -8,12 +8,16 @@
 $mysql=null;
 $mysql_connections=array();
 $mysql_databases=array();
+$sftp_connections=array();
+$sftp_streams=array();
 $tfa=null;
 
 function ss_sys_function($id,$t,$process=false,$sandbox=false){
 	global $system;
 	global $mysql;
 	global $mysql_connections;
+	global $sftp_connections;
+	global $sftp_streams;
 	global $mysql_databases;
 	global $tfa;
 	global $storage;
@@ -569,6 +573,325 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 			//-------------------------------------------------------------- string_split_sentence
 			if ($func=="string_split_sentence"){
 				return preg_replace('/(.*?[?!.](?=\s|$)).*/', '\\1', preg_replace( '/\s+/', ' ', $code));
+			}
+
+			//-------------------------------------------------------------- SFTP_CONNECT
+			if ($func=="sftp_connect"){
+
+				ini_set('display_errors',1);
+				error_reporting(E_ALL|E_STRICT);
+
+				//get the server we are connecting to
+				if (isset($code_part[3])){
+					if ($code_part[3]!=""){
+						$sftp_table=$code_part[3];
+					}else{
+						$sftp_table="default";
+					}
+				}else{
+					$sftp_table="default";
+				}
+				if ($sandbox==true){
+					$sftp_table="sandbox_sftp_".$id."";
+				}
+
+				$sftp_connections["".$sftp_table.""] = ssh2_connect($code_part[0],22);
+				if ($sftp_connections["".$sftp_table.""]==false){
+					log_error('ftp_connect failed');
+					return "false";
+				}else{
+					if (ssh2_auth_password($sftp_connections["".$sftp_table.""], $code_part[1], $code_part[2])) {
+						return "true";
+					}else{
+						log_error('ftp_login failed');
+						return "false";
+					}
+				}
+			}
+
+			//-------------------------------------------------------------- SFTP_CLOSE
+			if ($func=="sftp_close"){
+				//get the server we are connecting to
+				if (isset($code_part[0])){
+					if ($code_part[0]!=""){
+						$sftp_table=$code_part[0];
+					}else{
+						$sftp_table="default";
+					}
+				}else{
+					$sftp_table="default";
+				}
+				if ($sandbox==true){
+					$sftp_table="sandbox_sftp_".$id."";
+				}
+
+				ssh2_disconnect($sftp_connections["".$sftp_table.""]);
+
+				return "true";
+			}
+
+			//-------------------------------------------------------------- SFTP_LIST
+			if ($func=="sftp_list"){
+				//get the server we are connecting to
+				if (isset($code_part[1])){
+					if ($code_part[1]!=""){
+						$sftp_table=$code_part[1];
+					}else{
+						$sftp_table="default";
+					}
+				}else{
+					$sftp_table="default";
+				}
+				if ($sandbox==true){
+					$sftp_table="sandbox_sftp_".$id."";
+				}
+
+				$sftp = ssh2_sftp($sftp_connections["".$sftp_table.""]);
+				$sftp_fd = intval($sftp);
+				$sftp_path=ssh2_sftp_realpath($sftp,".");
+
+				$handle = opendir("ssh2.sftp://$sftp_fd".$sftp_path."".$code_part[0]."");
+				$fileon=0;
+				$files=array();
+				while (false != ($entry = readdir($handle))){
+					$files[$fileon]=$entry;
+					$fileon=$fileon+1;
+				}
+
+				closedir($handle);
+
+				if ($files!=false){
+					$obj=strtolower(codegenerate(50));
+					convert_phparray_ssarray($id,$files,$obj);
+					return "v.".$obj."";
+				}else{
+					return "false";
+				}
+			}
+
+			//-------------------------------------------------------------- SFTP_FILE_EXISTS
+			if ($func=="sftp_file_exists"){
+				//get the server we are connecting to
+				if (isset($code_part[1])){
+					if ($code_part[1]!=""){
+						$sftp_table=$code_part[1];
+					}else{
+						$sftp_table="default";
+					}
+				}else{
+					$sftp_table="default";
+				}
+				if ($sandbox==true){
+					$sftp_table="sandbox_sftp_".$id."";
+				}
+
+				$sftp = ssh2_sftp($sftp_connections["".$sftp_table.""]);
+				$sftp_fd = intval($sftp);
+				$sftp_path=ssh2_sftp_realpath($sftp,".");
+
+				//$filesize = filesize("ssh2.sftp://$sftp_fd".$sftp_path."".$code_part[0]."");
+				$filesize = ssh2_sftp_stat($sftp, "".$sftp_path."".$code_part[0]."");
+
+				if ($filesize>=1){
+					return "true";
+				}else{
+					return "false";
+				}
+			}
+
+
+			//-------------------------------------------------------------- sftp_file_contents
+			if ($func=="sftp_file_contents"){
+				//get the server we are connecting to
+				if (isset($code_part[1])){
+					if ($code_part[1]!=""){
+						$sftp_table=$code_part[1];
+					}else{
+						$sftp_table="default";
+					}
+				}else{
+					$sftp_table="default";
+				}
+				if ($sandbox==true){
+					$sftp_table="sandbox_sftp_".$id."";
+				}
+
+				$sftp = ssh2_sftp($sftp_connections["".$sftp_table.""]);
+				$sftp_fd = intval($sftp);
+				$sftp_path=ssh2_sftp_realpath($sftp,".");
+
+				$contents = file_get_contents("ssh2.sftp://$sftp_fd".$sftp_path."".$code_part[0]."");
+
+				return $contents;
+			}
+
+			//-------------------------------------------------------------- sftp_file_type
+			if ($func=="sftp_file_type"){
+				//get the server we are connecting to
+				if (isset($code_part[1])){
+					if ($code_part[1]!=""){
+						$sftp_table=$code_part[1];
+					}else{
+						$sftp_table="default";
+					}
+				}else{
+					$sftp_table="default";
+				}
+				if ($sandbox==true){
+					$sftp_table="sandbox_sftp_".$id."";
+				}
+
+				$sftp = ssh2_sftp($sftp_connections["".$sftp_table.""]);
+				$sftp_fd = intval($sftp);
+				$sftp_path=ssh2_sftp_realpath($sftp,".");
+
+				$contents = mime_content_type("ssh2.sftp://$sftp_fd".$sftp_path."".$code_part[0]."");
+
+				return $contents;
+			}
+
+			//-------------------------------------------------------------- sftp_file_send
+			if ($func=="sftp_file_send"){
+				//get the server we are connecting to
+				if (isset($code_part[2])){
+					if ($code_part[2]!=""){
+						$sftp_table=$code_part[2];
+					}else{
+						$sftp_table="default";
+					}
+				}else{
+					$sftp_table="default";
+				}
+				if ($sandbox==true){
+					$sftp_table="sandbox_sftp_".$id."";
+				}
+
+				$sftp = ssh2_sftp($sftp_connections["".$sftp_table.""]);
+				$sftp_fd = intval($sftp);
+				$sftp_path=ssh2_sftp_realpath($sftp,".");
+
+				$content=file_get_contents($system["runpath"].$code_part[0]);
+				$myfile = fopen("ssh2.sftp://$sftp_fd".$sftp_path."".$code_part[1]."", "w");
+				fwrite($myfile, $content);
+				fclose($myfile);
+
+				if ($myfile!=false){
+					return "true";
+				}else{
+					return "false";
+				}
+			}
+
+			//-------------------------------------------------------------- sftp_file_delete
+			if ($func=="sftp_file_delete"){
+				//get the server we are connecting to
+				if (isset($code_part[1])){
+					if ($code_part[1]!=""){
+						$sftp_table=$code_part[1];
+					}else{
+						$sftp_table="default";
+					}
+				}else{
+					$sftp_table="default";
+				}
+				if ($sandbox==true){
+					$sftp_table="sandbox_sftp_".$id."";
+				}
+
+				$sftp = ssh2_sftp($sftp_connections["".$sftp_table.""]);
+				$sftp_fd = intval($sftp);
+				$sftp_path=ssh2_sftp_realpath($sftp,".");
+
+				$delete=ssh2_sftp_unlink($sftp,"".$sftp_path."".$code_part[0]."");
+				if ($delete==true){
+					return "true";
+				}else{
+					return "false";
+				}
+			}
+
+			//-------------------------------------------------------------- sftp_folder_create
+			if ($func=="sftp_folder_create"){
+				//get the server we are connecting to
+				if (isset($code_part[1])){
+					if ($code_part[1]!=""){
+						$sftp_table=$code_part[1];
+					}else{
+						$sftp_table="default";
+					}
+				}else{
+					$sftp_table="default";
+				}
+				if ($sandbox==true){
+					$sftp_table="sandbox_sftp_".$id."";
+				}
+
+				$sftp = ssh2_sftp($sftp_connections["".$sftp_table.""]);
+				$sftp_fd = intval($sftp);
+				$sftp_path=ssh2_sftp_realpath($sftp,".");
+
+				$delete=ssh2_sftp_mkdir($sftp,"".$sftp_path."".$code_part[0]."");
+				if ($delete==true){
+					return "true";
+				}else{
+					return "false";
+				}
+			}
+
+			//-------------------------------------------------------------- sftp_folder_delete
+			if ($func=="sftp_folder_delete"){
+				//get the server we are connecting to
+				if (isset($code_part[1])){
+					if ($code_part[1]!=""){
+						$sftp_table=$code_part[1];
+					}else{
+						$sftp_table="default";
+					}
+				}else{
+					$sftp_table="default";
+				}
+				if ($sandbox==true){
+					$sftp_table="sandbox_sftp_".$id."";
+				}
+
+				$sftp = ssh2_sftp($sftp_connections["".$sftp_table.""]);
+				$sftp_fd = intval($sftp);
+				$sftp_path=ssh2_sftp_realpath($sftp,".");
+
+				$delete=ssh2_sftp_rmdir($sftp,"".$sftp_path."".$code_part[0]."");
+				if ($delete==true){
+					return "true";
+				}else{
+					return "false";
+				}
+			}
+
+			//-------------------------------------------------------------- sftp_chmod
+			if ($func=="sftp_chmod"){
+				//get the server we are connecting to
+				if (isset($code_part[2])){
+					if ($code_part[2]!=""){
+						$sftp_table=$code_part[2];
+					}else{
+						$sftp_table="default";
+					}
+				}else{
+					$sftp_table="default";
+				}
+				if ($sandbox==true){
+					$sftp_table="sandbox_sftp_".$id."";
+				}
+
+				$sftp = ssh2_sftp($sftp_connections["".$sftp_table.""]);
+				$sftp_fd = intval($sftp);
+				$sftp_path=ssh2_sftp_realpath($sftp,".");
+
+				$delete=ssh2_sftp_chmod($sftp,"".$sftp_path."".$code_part[0]."",$code_part[1]);
+				if ($delete==true){
+					return "true";
+				}else{
+					return "false";
+				}
 			}
 
 			//-------------------------------------------------------------- MYSQL_CONNECT
