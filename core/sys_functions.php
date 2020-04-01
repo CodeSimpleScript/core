@@ -578,9 +578,6 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 			//-------------------------------------------------------------- SFTP_CONNECT
 			if ($func=="sftp_connect"){
 
-				ini_set('display_errors',1);
-				error_reporting(E_ALL|E_STRICT);
-
 				//get the server we are connecting to
 				if (isset($code_part[3])){
 					if ($code_part[3]!=""){
@@ -891,6 +888,45 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 					return "true";
 				}else{
 					return "false";
+				}
+			}
+
+			//-------------------------------------------------------------- sftp_chmod
+			if ($func=="sftp_zip"){
+				//get the server we are connecting to
+				if (isset($code_part[2])){
+					if ($code_part[2]!=""){
+						$sftp_table=$code_part[2];
+					}else{
+						$sftp_table="default";
+					}
+				}else{
+					$sftp_table="default";
+				}
+				if ($sandbox==true){
+					$sftp_table="sandbox_sftp_".$id."";
+				}
+
+				$sftp = ssh2_sftp($sftp_connections["".$sftp_table.""]);
+				$sftp_fd = intval($sftp);
+				$sftp_path=ssh2_sftp_realpath($sftp,".");
+
+				// Create new zip class
+				$zip = new ZipArchive;
+				$zipcreated="ssh2.sftp://$sftp_fd".$sftp_path."".$code_part[1]."/".basename($code_part[0]).".zip";
+				if ($zip -> open($zipcreated, ZipArchive::CREATE ) === TRUE) {
+
+				    // Store the path into the variable
+				    $dir = opendir("ssh2.sftp://$sftp_fd".$sftp_path."".$code_part[0]."");
+
+				    while($file = readdir($dir)) {
+				        if(is_file("ssh2.sftp://$sftp_fd".$sftp_path."".$code_part[0]."/".$file)) {
+				            $zip -> addFile("ssh2.sftp://$sftp_fd".$sftp_path."".$code_part[0]."/".$file, $file);
+				        }
+				    }
+
+					closedir($dir);
+				    $zip ->close();
 				}
 			}
 
