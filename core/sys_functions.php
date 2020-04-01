@@ -721,12 +721,12 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 
 				$refdata=array();
 				$refdata["filename"]=basename($code_part[0]);
-				$refdata["filesize"]=$statinfo['size'];
-				$refdata["group"]=$statinfo['gid'];
-				$refdata["owner"]=$statinfo['uid'];
-				$refdata["atime"]=$statinfo['atime'];
-				$refdata["mtime"]=$statinfo['mtime'];
-				$refdata["mode"]=$statinfo['mode'];
+				$refdata["filesize"]=$stat['size'];
+				$refdata["group"]=$stat['gid'];
+				$refdata["owner"]=$stat['uid'];
+				$refdata["atime"]=$stat['atime'];
+				$refdata["mtime"]=$stat['mtime'];
+				$refdata["mode"]=$stat['mode'];
 
 				$obj=strtolower(codegenerate(50));
 				convert_phparray_ssarray($id,$refdata,$obj);
