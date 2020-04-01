@@ -930,6 +930,34 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 			}
 
 			//-------------------------------------------------------------- sftp_chmod
+			if ($func=="sftp_rename"){
+				//get the server we are connecting to
+				if (isset($code_part[2])){
+					if ($code_part[2]!=""){
+						$sftp_table=$code_part[2];
+					}else{
+						$sftp_table="default";
+					}
+				}else{
+					$sftp_table="default";
+				}
+				if ($sandbox==true){
+					$sftp_table="sandbox_sftp_".$id."";
+				}
+
+				$sftp = ssh2_sftp($sftp_connections["".$sftp_table.""]);
+				$sftp_fd = intval($sftp);
+				$sftp_path=ssh2_sftp_realpath($sftp,".");
+
+				$delete=ssh2_sftp_rename($sftp,"".$sftp_path."".$code_part[0]."","".$sftp_path."".$code_part[1]."");
+				if ($delete==true){
+					return "true";
+				}else{
+					return "false";
+				}
+			}
+
+			//-------------------------------------------------------------- sftp_chmod
 			if ($func=="sftp_zip"){
 				//get the server we are connecting to
 				if (isset($code_part[2])){
