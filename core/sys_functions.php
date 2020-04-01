@@ -696,6 +696,44 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 				}
 			}
 
+			//-------------------------------------------------------------- SFTP_FILE_EXISTS
+			if ($func=="sftp_file_info"){
+				//get the server we are connecting to
+				if (isset($code_part[1])){
+					if ($code_part[1]!=""){
+						$sftp_table=$code_part[1];
+					}else{
+						$sftp_table="default";
+					}
+				}else{
+					$sftp_table="default";
+				}
+				if ($sandbox==true){
+					$sftp_table="sandbox_sftp_".$id."";
+				}
+
+				$sftp = ssh2_sftp($sftp_connections["".$sftp_table.""]);
+				$sftp_fd = intval($sftp);
+				$sftp_path=ssh2_sftp_realpath($sftp,".");
+
+				//$filesize = filesize("ssh2.sftp://$sftp_fd".$sftp_path."".$code_part[0]."");
+				$stat = ssh2_sftp_stat($sftp, "".$sftp_path."".$code_part[0]."");
+
+				$refdata=array();
+				$refdata["filename"]=basename($code_part[0]);
+				$refdata["filesize"]=$statinfo['size'];
+				$refdata["group"]=$statinfo['gid'];
+				$refdata["owner"]=$statinfo['uid'];
+				$refdata["atime"]=$statinfo['atime'];
+				$refdata["mtime"]=$statinfo['mtime'];
+				$refdata["mode"]=$statinfo['mode'];
+
+				$obj=strtolower(codegenerate(50));
+				convert_phparray_ssarray($id,$refdata,$obj);
+				return "v.".$obj."";
+
+			}
+
 
 			//-------------------------------------------------------------- sftp_file_contents
 			if ($func=="sftp_file_contents"){
