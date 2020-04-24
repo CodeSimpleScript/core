@@ -647,15 +647,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 				$sftp_fd = intval($sftp);
 				$sftp_path=ssh2_sftp_realpath($sftp,".");
 
-				$handle = opendir("ssh2.sftp://$sftp_fd".$sftp_path."".$code_part[0]."");
-				$fileon=0;
-				$files=array();
-				while (false != ($entry = readdir($handle))){
-					$files[$fileon]=$entry;
-					$fileon=$fileon+1;
-				}
-
-				closedir($handle);
+				$files=scandir("ssh2.sftp://$sftp_fd".$sftp_path."".$code_part[0]."");
 
 				if ($files!=false){
 					$obj=strtolower(codegenerate(50));
