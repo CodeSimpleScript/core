@@ -80,6 +80,11 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 				return $_SERVER["HTTP_REFERER"];
 			}
 
+			//-------------------------------------------------------------- system_request_method
+			if ($func=="system_request_method"){
+				return $_SERVER["REQUEST_METHOD"];
+			}
+
 			//-------------------------------------------------------------- SYSTEM_file
 			if ($func=="system_file"){
 				return $system["url"];
