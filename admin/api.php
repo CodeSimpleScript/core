@@ -4,7 +4,7 @@ $response=[];
 $response["alive"]=true;
 $response["data"]=[];
 
-$domain=str_replace("www.", "", $_SERVER['HTTP_HOST']);
+$domain=$_SERVER['HTTP_HOST'];
 
 if (isset($_GET["command"])){
   if (canmakechange()==true){

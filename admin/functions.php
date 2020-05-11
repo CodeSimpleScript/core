@@ -56,7 +56,7 @@ function get_contents($url, $ua='Mozilla/5.0 (Windows NT 5.1; rv:2.0.1) Gecko/20
     $content = curl_exec($curl);
     curl_close($curl);
   }else{
-    $options=array('http' => array('user_agent' => $ua));
+    $options=array('http' => array('user_agent' => $ua, 'follow_location' => true));
     $context=stream_context_create($options);
     $content=file_get_contents($url, false, $context);
   }
