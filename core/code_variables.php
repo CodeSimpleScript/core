@@ -161,7 +161,7 @@ function ss_code_variables_string_replace($id,$l,$process=false,$sandbox=false){
 	$l=trim_clean($l);
 
 	if ($process==true){
-		if (checkpreg("|f\.([A-Za-z0-9_\-]*)\((.*)\)|i",$l)==true && $sandbox==false){ //--Check if system function
+		if (checkpreg("|f\.([A-Za-z0-9_\-]*)\((.*)\)|i",$l)==true){ //--Check if system function
 			preg_match_all("|f\.([A-Za-z0-9_\-]*)\((.*)\)|i",$l, $got);
 			foreach ($got[0] as $func){
 				$data=ss_code_function_run($id,$func,$sandbox);
@@ -269,7 +269,7 @@ function ss_code_variables_string_value($id,$l,$raw=false,$process=false,$sandbo
 
 	if ($process==true){
 		if ($found==false){
-			if (checkpreg("|f\.([A-Za-z0-9_\-]*)\((.*)\)|i",$l)==true && $sandbox==false){ //--Check if function
+			if (checkpreg("|f\.([A-Za-z0-9_\-]*)\((.*)\)|i",$l)==true){ //--Check if function
 				preg_match_all("|f\.([A-Za-z0-9_\-]*)\((.*)\)|i",$l, $got);
 				$found=true;
 				foreach ($got[0] as $func){
