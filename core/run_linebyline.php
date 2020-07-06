@@ -275,7 +275,7 @@ function ss_run_linebyline($t,$data=false,$sandbox=false){
 				}
 
 				//--------------------------------------- CODE FUNCTIONS
-				if (checkpreg("|f\.([A-Za-z0-9_\-]*)\(|i",$l)==true && $v["ran"]==false && $sandbox==false){ //--Check if function
+				if (checkpreg("|f\.([A-Za-z0-9_\-]*)\(|i",$l)==true && $v["ran"]==false){ //--Check if function
 					if (checkpreg("|v\.([A-Za-z0-9\.\[\]_\-]*)\s*=|i",$l)==false){ //--Check if not a varible set
 						$output=ss_code_function_run($id,$l,$sandbox);
 						if (is_string($output)){

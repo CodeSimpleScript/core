@@ -122,6 +122,7 @@ function ss_code_function_run($id,$t,$encoded=false,$sandbox=false){
 						}
 						$ss_functions_open["".$func.""]--;
 					}else{
+						return "nonscope";
 						if ($system["debug"]==true){ $system["debug_log"].="\r\n> Run Function F - ".$func." NOT SANDBOX FUNCTION FAIL"; }
 					}
 				}else{

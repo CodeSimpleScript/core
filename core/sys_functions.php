@@ -2352,7 +2352,11 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 			if ($func=="run_sandbox_file" && $sandbox==false){
 				if (file_exists($system["runpath"].$code)){
 					if (!is_dir($system["runpath"].$code)){
-						return ss_run_linebyline(file_get_contents($system["runpath"].$code, FILE_USE_INCLUDE_PATH),false,true);
+						$response=ss_run_linebyline(file_get_contents($system["runpath"].$code, FILE_USE_INCLUDE_PATH),false,true);
+
+						//De register any functions from sandbox for next sandbox run
+						ss_code_functions_purge_sandbox();
+						return $response;
 					}else{
 						log_error("System Function (run_sandbox): cant run folder path",$t);
 						return "false";
