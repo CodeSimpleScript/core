@@ -110,6 +110,9 @@ function ss_code_function_run($id,$t,$encoded=false,$sandbox=false){
 
 					//Check sandbox status
 					if ($sandbox==true){
+
+						error_log($ss_functions["".$func.""], 0);
+
 						if ($ss_functions_sandbox["".$func.""]==true){
 							$allowed=true;
 						}else{
