@@ -29,7 +29,7 @@ function ss_code_functions_register($id,$t,$sandbox=false){
 
 		if ($f_reg==true){
 			if (strpos($l, '}') !== false){
-				//--Reigster function now
+				//--register function now
 				if ($system["debug"]==true){ $system["debug_log"].="\r\n> Register Function End - End of function found, registered ".$name.""; }
 				if (!isset($ss_functions["".$name.""])){
 					$ss_functions["".$name.""]=removeblank($f);
@@ -72,9 +72,13 @@ function ss_code_functions_purge_sandbox(){
 	global $ss_functions_list_sandbox;
 
 	foreach ($ss_functions_list_sandbox as $keycode){
-		unset($ss_functions["".$keycode.""]);
-		unset($ss_functions_open["".$keycode.""]);
-		unset($ss_functions_sandbox["".$keycode.""]);
+		if (isset($keycode)){
+			if ($keycode!==""){
+				unset($ss_functions["".$keycode.""]);
+				unset($ss_functions_open["".$keycode.""]);
+				unset($ss_functions_sandbox["".$keycode.""]);
+			}
+		}
 	}
 
 	unset($ss_functions_list_sandbox);
@@ -108,6 +112,7 @@ function ss_code_function_run($id,$t,$encoded=false,$sandbox=false){
 					if ($sandbox==true){
 						if ($ss_functions_sandbox["".$func.""]==true){
 							$allowed=true;
+							return $ss_functions["".$func.""];
 						}else{
 							$allowed=false;
 						}
