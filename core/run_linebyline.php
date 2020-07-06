@@ -12,6 +12,10 @@ function ss_run_linebyline($t,$data=false,$sandbox=false){
 	$system["id"]=$system["id"]+1;
 	$id=$system["id"]; //--Process id, used for varible and external function memory during linebyline
 
+	//Run over processes first!!!
+
+	$t=ss_code_functions_register($id,$t,$sandbox);
+
 	if ($system["debug"]==true){ $system["debug_log"].="\r\n> LineByLine Invoke Start with ID ".$id.""; }
 
 	if (is_array($data)){

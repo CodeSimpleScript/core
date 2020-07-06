@@ -1074,7 +1074,6 @@ function array_merge_recursive_distinct($arr1, $arr2){
 			$t=file_get_contents($file, FILE_USE_INCLUDE_PATH);
 			$t=removeblank($t);
 			$t=ss_sys_function_prerun($t);
-			$t=ss_code_functions_register($t);
 
 			$t=ss_run_linebyline($t);
 

@@ -2366,7 +2366,12 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 			//-------------------------------------------------------------- RUN
 			if ($func=="run_sandbox_code" && $sandbox==false){
 				$codesandrun=base64_decode(strtr($code, '-_,','+/='));
-				return ss_run_linebyline($codesandrun,false,true);
+
+				$response=ss_run_linebyline($codesandrun,false,true);
+				//De register any functions from sandbox for next sandbox run
+				ss_code_functions_purge_sandbox();
+
+				return $response;
 			}
 
 			//-------------------------------------------------------------- http_request_httpcode

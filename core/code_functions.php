@@ -2,11 +2,15 @@
 
 $ss_functions=array();
 $ss_functions_open=array();
+$ss_functions_sandbox=array();
+$ss_functions_list_sandbox=array();
 
-function ss_code_functions_register($t){
+function ss_code_functions_register($id,$t,$sandbox=false){
 	global $system;
 	global $ss_functions;
 	global $ss_functions_open;
+	global $ss_functions_sandbox;
+	global $ss_functions_list_sandbox;
 
 	$n="";
 	$f="";
@@ -27,8 +31,16 @@ function ss_code_functions_register($t){
 			if (strpos($l, '}') !== false){
 				//--Reigster function now
 				if ($system["debug"]==true){ $system["debug_log"].="\r\n> Register Function End - End of function found, registered ".$name.""; }
-				$ss_functions["".$name.""]=removeblank($f);
-				$ss_functions_open["".$name.""]=0;
+				if (!isset($ss_functions["".$name.""])){
+					$ss_functions["".$name.""]=removeblank($f);
+					$ss_functions_open["".$name.""]=0;
+					$ss_functions_sandbox["".$name.""]=$sandbox;
+					if ($sandbox==true){
+						array_push($ss_functions_list_sandbox,$name);
+					}
+				}else{
+					if ($system["debug"]==true){ $system["debug_log"].="\r\n> Register Function DUPLICATE - not able to register ".$name.""; }
+				}
 				$f_reg_run=true;
 				$f_reg=false;
 				$name=false;
@@ -52,11 +64,29 @@ function ss_code_functions_register($t){
 	return $n;
 }
 
+function ss_code_functions_purge_sandbox(){
+	global $system;
+	global $ss_functions;
+	global $ss_functions_open;
+	global $ss_functions_sandbox;
+	global $ss_functions_list_sandbox;
+
+	foreach ($ss_functions_list_sandbox as $keycode){
+		unset($ss_functions["".$keycode.""]);
+		unset($ss_functions_open["".$keycode.""]);
+		unset($ss_functions_sandbox["".$keycode.""]);
+	}
+
+	unset($ss_functions_list_sandbox);
+	$ss_functions_list_sandbox=array();
+}
+
 function ss_code_function_run($id,$t,$encoded=false,$sandbox=false){
 	global $system;
 	global $settings;
 	global $ss_functions;
 	global $ss_functions_open;
+	global $ss_functions_sandbox;
 
 	if (checkpreg("|f\.([A-Za-z0-9_\-]*)\((.*)\)|i",$t)==true){ //--Check if we have a match for s.[A-Za-z0-9_-]()
 		preg_match_all("|f\.([A-Za-z0-9_\-]*)\((.*)\)|i",$t, $got); //--Fetch each instance of a function on it's own so we dont mix them up
@@ -72,13 +102,28 @@ function ss_code_function_run($id,$t,$encoded=false,$sandbox=false){
 			if (isset($ss_functions["".$func.""])){
 				if ($ss_functions_open["".$func.""]<=$settings["settings_function_loopmax"]){
 					if ($system["debug"]==true){ $system["debug_log"].="\r\n> Run Function F - ".$func.""; }
-					$ss_functions_open["".$func.""]++;
-					if ($code==""){
-						return ss_run_linebyline($ss_functions["".$func.""],false,$sandbox);
-					}else{
-						return ss_run_linebyline($ss_functions["".$func.""],$code_parts,$sandbox);
+					$allowed=true;
+
+					//Check sandbox status
+					if ($sandbox==true){
+						if ($ss_functions_sandbox["".$func.""]==true){
+							$allowed=true;
+						}else{
+							$allowed=false;
+						}
 					}
-					$ss_functions_open["".$func.""]--;
+
+					if ($allowed==true){
+						$ss_functions_open["".$func.""]++;
+						if ($code==""){
+							return ss_run_linebyline($ss_functions["".$func.""],false,$sandbox);
+						}else{
+							return ss_run_linebyline($ss_functions["".$func.""],$code_parts,$sandbox);
+						}
+						$ss_functions_open["".$func.""]--;
+					}else{
+						if ($system["debug"]==true){ $system["debug_log"].="\r\n> Run Function F - ".$func." NOT SANDBOX FUNCTION FAIL"; }
+					}
 				}else{
 					if ($system["debug"]==true){ $system["debug_log"].="\r\n> Run Function F - ".$func." LIMIT HIT OF (".$settings["settings_function_loopmax"].")"; }
 				}
