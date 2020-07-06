@@ -2272,7 +2272,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 			}
 
 			//-------------------------------------------------------------- ARRAY_LOOP
-			if ($func=="array_loop" && $sandbox==false){
+			if ($func=="array_loop"){
 				$codepart=convert_ssarray_phparray($id,$code_part[1],$sandbox);
 				$return="";
 				if (!is_array($codepart)){
