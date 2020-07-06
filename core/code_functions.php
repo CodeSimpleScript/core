@@ -112,7 +112,6 @@ function ss_code_function_run($id,$t,$encoded=false,$sandbox=false){
 					if ($sandbox==true){
 						if ($ss_functions_sandbox["".$func.""]==true){
 							$allowed=true;
-							return $ss_functions["".$func.""];
 						}else{
 							$allowed=false;
 						}
