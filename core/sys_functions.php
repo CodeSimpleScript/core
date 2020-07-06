@@ -2282,7 +2282,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 					$parts=base64_encode(json_encode($parts));
 					$linecode="f.".$code_part[0]."(".$parts.")";
 					if ($system["debug"]==true){ $system["debug_log"].="\r\n> Run Function S - ".$func." | ".$t." | ".$linecode.""; }
-					$return.=ss_code_function_run($id,$linecode,true);
+					$return.=ss_code_function_run($id,$linecode,true,$sandbox);
 				}
 				return $return;
 			}
