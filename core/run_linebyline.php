@@ -4,7 +4,7 @@
 //######################################################################################################### - LINE BY LINE RUN
 //#########################################################################################################
 //############################## - $t = The content that this is checking
-function ss_run_linebyline($t,$data=false,$sandbox=false){
+function ss_run_linebyline($t,$data=false,$sandbox=false,$sandboxencode=true){
 	global $system;
 
 	$time_start = microtime_float();
@@ -424,11 +424,15 @@ function ss_run_linebyline($t,$data=false,$sandbox=false){
 	if ($sandbox==false){
 		return $r;
 	}else{
-		$retarray=array();
-		$retarray["response"]=$r;
-		$retarray["cputime"]=round(($time_end-$time_start),6);
-		$retjson=json_encode($retarray);
-		return $retjson;
+		if ($sandboxencode==true){
+			$retarray=array();
+			$retarray["response"]=$r;
+			$retarray["cputime"]=round(($time_end-$time_start),6);
+			$retjson=json_encode($retarray);
+			return $retjson;
+		}else{
+		 return $r;
+		}
 	}
 }
 

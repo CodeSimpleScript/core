@@ -116,19 +116,9 @@ function ss_code_function_run($id,$t,$encoded=false,$sandbox=false){
 					if ($allowed==true){
 						$ss_functions_open["".$func.""]++;
 						if ($code==""){
-							$response=ss_run_linebyline($ss_functions["".$func.""],false,$sandbox);
-							if ($sandbox==true){
-								return $response["response"];
-							}else{
-								return $response;
-							}
+							return ss_run_linebyline($ss_functions["".$func.""],false,$sandbox,false);
 						}else{
-							$response=ss_run_linebyline($ss_functions["".$func.""],$code_parts,$sandbox);
-							if ($sandbox==true){
-								return $response["response"];
-							}else{
-								return $response;
-							}
+							return ss_run_linebyline($ss_functions["".$func.""],$code_parts,$sandbox,false);
 						}
 						$ss_functions_open["".$func.""]--;
 					}else{
