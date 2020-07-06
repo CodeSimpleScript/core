@@ -97,10 +97,12 @@ function ss_code_function_run($id,$t,$encoded=false,$sandbox=false){
 		foreach ($got[0] as $script){ //--For each found function that matches return only contained patern
 			$func=fetchpreg("|f\.([A-Za-z0-9_\-]*)\(|i",$script); //--Take that patern that was returned and fetch from it the function name.
 			$code=fetchpreg("|f\.".$func."\((.*)\)|i",$script); //--Take that patern that was returned and fetch from it the function content.
-			if ($encoded==true){
-				$code_parts[]=json_decode(base64_decode($code),true);
-			}else{
-				$code_parts=ss_sys_function_inputarray($id,$code,$encoded,$sandbox);
+			if ($code!=""){
+				if ($encoded==true){
+					$code_parts[]=json_decode(base64_decode($code),true);
+				}else{
+					$code_parts=ss_sys_function_inputarray($id,$code,false,$sandbox);
+				}
 			}
 
 			if (isset($ss_functions["".$func.""])){
