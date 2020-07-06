@@ -269,9 +269,6 @@ function ss_run_linebyline($t,$data=false,$sandbox=false,$sandboxencode=true){
 						$output=ss_sys_function($id,$l,true,$sandbox);
 						if (is_string($output)){
 							$r.=$output;
-						}else{
-							$output = gettype($output);
-							$r.=$output;
 						}
 						$v["ran"]=true;
 					}
