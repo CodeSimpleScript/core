@@ -270,8 +270,7 @@ function ss_run_linebyline($t,$data=false,$sandbox=false,$sandboxencode=true){
 						if (is_string($output)){
 							$r.=$output;
 						}else{
-							$output = base64_encode($output.gettype($output));
-							$output = strtr($output, '+/=', '-_,');
+							$output = gettype($output);
 							$r.=$output;
 						}
 						$v["ran"]=true;
