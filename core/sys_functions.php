@@ -2376,7 +2376,6 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 				$codesandrun=base64_decode(strtr($code, '-_,','+/='));
 
 				$response=ss_run_linebyline($codesandrun,false,true);
-				error_log($response, 0);
 				//De register any functions from sandbox for next sandbox run
 				ss_code_functions_purge_sandbox();
 
@@ -2846,7 +2845,7 @@ function ss_sys_function_inputarray($id,$code,$process=false,$sandbox=false){
 	preg_match_all("|\{\{([^\}]*)\}\}|i",$code_split, $match); //--Fetch each instance of a function on it's own so we dont mix them up
 	$code_part_on=0;
 	foreach ($match[1] as $splits){
-		$value=ss_code_variables_string_replace($id,$splits,true,$process,$sandbox);
+		$value=ss_code_variables_string_replace($id,$splits,$process,$sandbox);
 		$value=str_replace("\s"," ",$value);
 		$code_part[$code_part_on]=decode_makesafe_ss_input($value);
 		$code_part_on+=1;
