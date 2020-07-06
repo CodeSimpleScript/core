@@ -77,7 +77,11 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 
 			//-------------------------------------------------------------- system_referral
 			if ($func=="system_referral"){
-				return $_SERVER["HTTP_REFERER"];
+				if (isset($_SERVER["HTTP_REFERER"])){
+					return $_SERVER["HTTP_REFERER"];
+				}else{
+					return "false";
+				}
 			}
 
 			//-------------------------------------------------------------- system_request_method
@@ -2372,6 +2376,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 				$codesandrun=base64_decode(strtr($code, '-_,','+/='));
 
 				$response=ss_run_linebyline($codesandrun,false,true);
+				error_log($response, 0);
 				//De register any functions from sandbox for next sandbox run
 				ss_code_functions_purge_sandbox();
 
