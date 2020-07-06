@@ -123,11 +123,17 @@ function ss_code_function_run($id,$t,$encoded=false,$sandbox=false){
 					if ($allowed==true){
 						$ss_functions_open["".$func.""]++;
 						if ($code==""){
-							return ss_run_linebyline($ss_functions["".$func.""],false,$sandbox,false);
+							$return=ss_run_linebyline($ss_functions["".$func.""],false,$sandbox,false);
 						}else{
-							return ss_run_linebyline($ss_functions["".$func.""],$code_parts,$sandbox,false);
+							$return=ss_run_linebyline($ss_functions["".$func.""],$code_parts,$sandbox,false);
 						}
 						$ss_functions_open["".$func.""]--;
+
+						if ($sandbox==true){
+							error_log($return, 0);
+						}
+
+						return $return;
 					}else{
 						return "nonscope";
 						if ($system["debug"]==true){ $system["debug_log"].="\r\n> Run Function F - ".$func." NOT SANDBOX FUNCTION FAIL"; }
