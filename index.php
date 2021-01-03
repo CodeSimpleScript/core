@@ -90,7 +90,7 @@
 		$url=$system["location"].$settings["location_logs"]."/access_".$today.".log";
 		if ($timesend>=1){ log_slow($timesend); }
 
-		error_log("".$timestamp ." | file: ".$system["url"]." | ip: ".$system["ip"]." | useragent: ".$system["useragent"]." | time: ".$timesend."\n", 3, $url);
+		//error_log("".$timestamp ." | file: ".$system["url"]." | ip: ".$system["ip"]." | useragent: ".$system["useragent"]." | time: ".$timesend."\n", 3, $url);
 	}
 
 	function log_slow($timesend){
@@ -100,7 +100,7 @@
 		$timestamp = date("Y/m/d h:i:s");
 		$url=$system["location"].$settings["location_logs"]."/slow_".$today.".log";
 
-		error_log("".$timestamp ." | file: ".$system["url"]." | ip: ".$system["ip"]." | useragent: ".$system["useragent"]." | time: ".$timesend."\n", 3, $url);
+		//error_log("".$timestamp ." | file: ".$system["url"]." | ip: ".$system["ip"]." | useragent: ".$system["useragent"]." | time: ".$timesend."\n", 3, $url);
 	}
 
 	function parse_http_head ($str) {
