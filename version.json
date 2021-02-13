@@ -1,1 +1,1 @@
-{ "message": "Removed all logging for now except error", "version": "0.5.55" }
+{ "message": "Added new sftp_list_opendir for speed testing", "version": "0.5.56" }

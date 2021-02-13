@@ -672,6 +672,44 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 				}
 			}
 
+			//-------------------------------------------------------------- SFTP_LIST_opendir
+			if ($func=="sftp_list_opendir"){
+				//get the server we are connecting to
+				if (isset($code_part[1])){
+					if ($code_part[1]!=""){
+						$sftp_table=$code_part[1];
+					}else{
+						$sftp_table="default";
+					}
+				}else{
+					$sftp_table="default";
+				}
+				if ($sandbox==true){
+					$sftp_table="sandbox_sftp_".$id."";
+				}
+
+				$sftp = ssh2_sftp($sftp_connections["".$sftp_table.""]);
+				$sftp_fd = intval($sftp);
+				$sftp_path=ssh2_sftp_realpath($sftp,".");
+
+				$dh=opendir("ssh2.sftp://$sftp_fd".$sftp_path."".$code_part[0]."");
+				$files=[];
+				while (false !== ($filename = readdir($dh))) {
+					$files[] = $filename;
+				}
+
+				sort($files);
+
+
+				if ($files!=false){
+					$obj=strtolower(codegenerate(50));
+					convert_phparray_ssarray($id,$files,$obj);
+					return "v.".$obj."";
+				}else{
+					return "false";
+				}
+			}
+
 			//-------------------------------------------------------------- SFTP_FILE_EXISTS
 			if ($func=="sftp_file_exists"){
 				//get the server we are connecting to
