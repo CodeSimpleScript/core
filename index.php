@@ -1084,7 +1084,7 @@ function array_merge_recursive_distinct($arr1, $arr2){
 			ss_cleanup_system_variables();
 
 		}else{
-			if ($system["url"]=="404"){
+			if ($system["url"]=="/404"){
 				customError(404,"Sorry but we are unable to find the file requested.");
 			}else{
 				header("Location: /404");
@@ -1134,7 +1134,7 @@ function array_merge_recursive_distinct($arr1, $arr2){
 					die();
 				}
 			}else{
-				if ($system["url"]=="404"){
+				if ($system["url"]=="/404"){
 					customError(404,"Sorry but we are unable to find the file requested.");
 				}else{
 					header("Location: /404");
