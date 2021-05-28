@@ -1524,9 +1524,14 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 					$cert_ressource = $cont['options']['ssl']['peer_certificate'];
 					$cert = openssl_x509_parse( $cert_ressource );
 					$listdomains=explode(',', $cert["extensions"]["subjectAltName"]);
+					
+					$short_parse="*.".preg_replace("/^(.*?)\.(.*)$/","$2",$orignal_parse);
 
 					foreach ($listdomains as $v) {
 						if (strpos($v, $orignal_parse) !== false) {
+							$res=true;
+						}
+						if (strpos($v, $short_parse) !== false) {
 							$res=true;
 						}
 					}
