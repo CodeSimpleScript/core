@@ -1,1 +1,1 @@
-{ "message": "Added check for short parse in check valid ssl", "version": "0.5.59" }
+{ "message": "Added some new sandbox checks for current running file", "version": "0.5.61" }

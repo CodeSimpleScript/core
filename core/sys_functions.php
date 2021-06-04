@@ -61,22 +61,22 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 			}
 
 			//-------------------------------------------------------------- SYSTEM_MAXTIME
-			if ($func=="system_maxtime"){
+			if ($func=="system_maxtime" && $sandbox==false){
 				set_time_limit(intval($code));
 			}
 
 			//-------------------------------------------------------------- SYSTEM_memory
-			if ($func=="system_memory"){
+			if ($func=="system_memory" && $sandbox==false){
 				ini_set('memory_limit',''.$code.'M');
 			}
 
 			//-------------------------------------------------------------- SYSTEM_url
-			if ($func=="system_url"){
+			if ($func=="system_url" && $sandbox==false){
 				return $_SERVER["REQUEST_URI"];
 			}
 
 			//-------------------------------------------------------------- system_referral
-			if ($func=="system_referral"){
+			if ($func=="system_referral" && $sandbox==false){
 				if (isset($_SERVER["HTTP_REFERER"])){
 					return $_SERVER["HTTP_REFERER"];
 				}else{
@@ -85,27 +85,27 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 			}
 
 			//-------------------------------------------------------------- system_request_method
-			if ($func=="system_request_method"){
+			if ($func=="system_request_method" && $sandbox==false){
 				return $_SERVER["REQUEST_METHOD"];
 			}
 
 			//-------------------------------------------------------------- SYSTEM_file
-			if ($func=="system_file"){
+			if ($func=="system_file" && $sandbox==false){
 				return $system["url"];
 			}
 
 			//-------------------------------------------------------------- SYSTEM_file
-			if ($func=="system_file_original"){
+			if ($func=="system_file_original" && $sandbox==false){
 				return $system["url_original"];
 			}
 
 			//-------------------------------------------------------------- SYSTEM_SLEEP_SECOND
-			if ($func=="system_sleep_second"){
+			if ($func=="system_sleep_second" && $sandbox==false){
 				sleep(intval($code));
 			}
 
 			//-------------------------------------------------------------- SYSTEM_SLEEP_MS
-			if ($func=="system_sleep_ms"){
+			if ($func=="system_sleep_ms" && $sandbox==false){
 				usleep(((intval($code))*1000));
 			}
 
