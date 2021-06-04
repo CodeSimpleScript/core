@@ -1342,12 +1342,12 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 			}
 
 			//-------------------------------------------------------------- STRING_URL_ENCODE
-			if ($func=="string_url_encode"){
+			if ($func=="string_url_encode" OR $func=="url_encode"){
 				return urlencode($code);
 			}
 
 			//-------------------------------------------------------------- STRING_URL_DECODE
-			if ($func=="string_url_decode"){
+			if ($func=="string_url_decode" OR $func=="url_decode"){
 				return urldecode($code);
 			}
 
