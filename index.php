@@ -966,7 +966,7 @@ function array_merge_recursive_distinct($arr1, $arr2){
 		$s="index.ssc";
 	}
 	$u=explode("/",ltrim($s, '/'));
-	while(list($key,$val)=each($u)){
+	foreach ($u as $val){
 		if (checkpreg("|([^\.]*)\.ssc|i",$val)==true){ $system["url_code"]=true; }
 		if ($val==""){ $val="index.ssc"; $system["url_code"]=true; }
 		$system["url"].="/".$val."";
