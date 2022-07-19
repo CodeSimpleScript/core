@@ -398,7 +398,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 				$s=substr($oldcode, 12, 2); //[2018][02][18][10][53][47]
 				$stringdate="$y-$m-$d $h:$mi:$s";
 				$timestampmake = strtotime($stringdate);
-				return date(intval($code_part[0]),$timestampmake);
+				return date($code_part[0],$timestampmake);
 			}
 
 			//-------------------------------------------------------------- convert_timestamp_ago
