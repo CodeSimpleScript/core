@@ -230,7 +230,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 					$code_part[3]="/";
 				}
 				$code_part[3]=trim($code_part[3],"{}");
-				setcookie($code_part[0], $code_part[1], time() + ($code_part[2]), "/", $code_part[3]); // 86400 = 1 day
+				setcookie($code_part[0], $code_part[1], time() + strval($code_part[2]), "/", $code_part[3]); // 86400 = 1 day
 			}
 
 			//-------------------------------------------------------------- COOKIE_DELETE
