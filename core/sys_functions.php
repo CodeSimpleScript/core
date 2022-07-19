@@ -1675,7 +1675,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 
 			//-------------------------------------------------------------- NUMBER_FORMAT
 			if ($func=="number_format"){
-				return number_format($code);
+				return number_format(intval($code));
 			}
 
 			//-------------------------------------------------------------- FILE_UPLOADED
