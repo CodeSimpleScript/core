@@ -354,9 +354,9 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 
 			//-------------------------------------------------------------- PERCENT / PERCENTAGE
 			if ($func=="percent" || $func=="percentage"){
-				$myNumber = $code_part[1];
+				$myNumber = intval($code_part[1]);
 				//I want to get 25% of 928.
-				$percentToGet = $code_part[0];
+				$percentToGet = intval($code_part[0]);
 				//Convert our percentage value into a decimal.
 				$percentInDecimal = $percentToGet / 100;
 				//Get the result.
@@ -366,7 +366,11 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 
 			//-------------------------------------------------------------- PERCENT_of / PERCENTAGE_of
 			if ($func=="percent_of" || $func=="percentage_of"){
-				return ((100.0*$code_part[0])/$code_part[1]);
+ 		      if (intval($code_part[1])>=1){
+				return ((100.0*intval($code_part[0]))/intval($code_part[1]));
+ 			  }else{
+  		        return 0;
+   		      }
 			}
 
 			//-------------------------------------------------------------- TIMESTAMP_UNIX
@@ -380,7 +384,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 
 			//-------------------------------------------------------------- convert_timestamp_string_unix
 			if ($func=="convert_timestamp_string_unix"){
-				return date($code_part[0],$code_part[1]);
+				return date(intval($code_part[0]),intval($code_part[1]));
 			}
 
 			//-------------------------------------------------------------- convert_timestamp_string
@@ -394,13 +398,13 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 				$s=substr($oldcode, 12, 2); //[2018][02][18][10][53][47]
 				$stringdate="$y-$m-$d $h:$mi:$s";
 				$timestampmake = strtotime($stringdate);
-				return date($code_part[0],$timestampmake);
+				return date(intval($code_part[0]),$timestampmake);
 			}
 
 			//-------------------------------------------------------------- convert_timestamp_ago
 			if ($func=="convert_timestamp_ago"){
-				$oldcode=$code_part[0];
-				$full=$code_part[1];
+				$oldcode=intval($code_part[0]);
+				$full=intval($code_part[1]);
 				$y=substr($oldcode, 0, 4); //[2018]0218105347
 				$m=substr($oldcode, 4, 2); //[2018][02]18105347
 				$d=substr($oldcode, 6, 2); //[2018][02][18]105347
@@ -443,7 +447,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 
 			//-------------------------------------------------------------- covert_unix_timestamp
 			if ($func=="covert_unix_timestamp"){
-				return date('YmdHis',$code);
+				return date('YmdHis',intval($code));
 			}
 
 			//-------------------------------------------------------------- TIMESTAMP
@@ -457,7 +461,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 
 			//-------------------------------------------------------------- NUMBER_ROUND
 			if ($func=="number_round"){
-				return round($code);
+				return round(intval($code));
 			}
 
 			//-------------------------------------------------------------- string_brokenhtml
@@ -1393,7 +1397,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 
 			//-------------------------------------------------------------- NUMBER_ORDINAL
 			if ($func=="number_ordinal"){
-				$test_c = abs($code) % 10;
+				$test_c = abs(intval($code)) % 10;
 		    $ext = ((abs($code) %100 < 21 && abs($code) %100 > 4) ? 'th'
 		            : (($test_c < 4) ? ($test_c < 3) ? ($test_c < 2) ? ($test_c < 1)
 		            ? 'th' : 'st' : 'nd' : 'rd' : 'th'));
