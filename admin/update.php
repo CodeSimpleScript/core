@@ -1,7 +1,7 @@
 <?php
   //ss update file
   ini_set('memory_limit','60M');
-	ini_set('date.timezone', 'America/New_York');
+  ini_set('date.timezone', 'America/New_York');
   set_time_limit(1200);
 
   if (isset($_GET['folder'])){
@@ -87,10 +87,12 @@
 						$copy=true;
 					}
 					if ($copy==true){
-						mkdir(dirname($whatIWant), 0777, true);
-            chmod($whatIWant, 755);
-						copy("zip://".$path."#".$filename, $whatIWant);
-						nhlog("File copy ".$filename." with ID ".$i.", part ".$p."");
+						if ($whatIWant!=""){
+							mkdir(dirname($whatIWant), 0777, true);
+            						chmod($whatIWant, 755);
+							copy("zip://".$path."#".$filename, $whatIWant);
+							nhlog("File copy ".$filename." with ID ".$i.", part ".$p."");
+						}
 					}
 				}else{
 					nhlog("File skip ".$filename." with ID ".$i.", part ".$p.". - We dont install the following files");
