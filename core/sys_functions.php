@@ -384,7 +384,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 
 			//-------------------------------------------------------------- convert_timestamp_string_unix
 			if ($func=="convert_timestamp_string_unix"){
-				return date(intval($code_part[0]),intval($code_part[1]));
+				return date($code_part[0],intval($code_part[1]));
 			}
 
 			//-------------------------------------------------------------- convert_timestamp_string
