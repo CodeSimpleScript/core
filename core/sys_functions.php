@@ -2622,7 +2622,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 						CURLOPT_POST => true,
 						CURLOPT_CONNECTTIMEOUT => 15,
 						CURLOPT_TIMEOUT => 15,
-						CURLOPT_POSTFIELDS => json_encode(utf8ize($postarray), JSON_NUMERIC_CHECK | JSON_HEX_QUOT | JSON_HEX_TAG),
+						CURLOPT_POSTFIELDS => json_encode($postarray, JSON_NUMERIC_CHECK | JSON_HEX_QUOT | JSON_HEX_TAG),
 						CURLOPT_HTTPHEADER => $headr
 				));
 
