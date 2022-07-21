@@ -62,7 +62,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 
 			//-------------------------------------------------------------- SYSTEM_MAXTIME
 			if ($func=="system_maxtime" && $sandbox==false){
-				set_time_limit(intval($code));
+				set_time_limit(floatval($code));
 			}
 
 			//-------------------------------------------------------------- SYSTEM_memory
@@ -101,12 +101,12 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 
 			//-------------------------------------------------------------- SYSTEM_SLEEP_SECOND
 			if ($func=="system_sleep_second" && $sandbox==false){
-				sleep(intval($code));
+				sleep(floatval($code));
 			}
 
 			//-------------------------------------------------------------- SYSTEM_SLEEP_MS
 			if ($func=="system_sleep_ms" && $sandbox==false){
-				usleep(((intval($code))*1000));
+				usleep(((floatval($code))*1000));
 			}
 
 			//-------------------------------------------------------------- SYSTEM_SLEEP_MS
@@ -230,7 +230,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 					$code_part[3]="/";
 				}
 				$code_part[3]=trim($code_part[3],"{}");
-				setcookie($code_part[0], $code_part[1], time() + intval($code_part[2]), "/", $code_part[3]); // 86400 = 1 day
+				setcookie($code_part[0], $code_part[1], time() + floatval($code_part[2]), "/", $code_part[3]); // 86400 = 1 day
 			}
 
 			//-------------------------------------------------------------- COOKIE_DELETE
@@ -301,7 +301,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 
 
 				if ($code!=""){
-					$numbertimes=intval($code);
+					$numbertimes=floatval($code);
 				}else{
 					$numbertimes=mt_rand(2,3);
 				}
@@ -354,9 +354,9 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 
 			//-------------------------------------------------------------- PERCENT / PERCENTAGE
 			if ($func=="percent" || $func=="percentage"){
-				$myNumber = intval($code_part[1]);
+				$myNumber = floatval($code_part[1]);
 				//I want to get 25% of 928.
-				$percentToGet = intval($code_part[0]);
+				$percentToGet = floatval($code_part[0]);
 				//Convert our percentage value into a decimal.
 				$percentInDecimal = $percentToGet / 100;
 				//Get the result.
@@ -366,8 +366,8 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 
 			//-------------------------------------------------------------- PERCENT_of / PERCENTAGE_of
 			if ($func=="percent_of" || $func=="percentage_of"){
- 		      if (intval($code_part[1])>=1){
-				return ((100.0*intval($code_part[0]))/intval($code_part[1]));
+ 		      if (floatval($code_part[1])>=1){
+				return ((100.0*floatval($code_part[0]))/floatval($code_part[1]));
  			  }else{
   		        return 0;
    		      }
@@ -378,13 +378,13 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 				if ($code==""){
 					return time();
 				}else{
-					return (time()+intval($code));
+					return (time()+floatval($code));
 				}
 			}
 
 			//-------------------------------------------------------------- convert_timestamp_string_unix
 			if ($func=="convert_timestamp_string_unix"){
-				return date($code_part[0],intval($code_part[1]));
+				return date($code_part[0],floatval($code_part[1]));
 			}
 
 			//-------------------------------------------------------------- convert_timestamp_string
@@ -403,8 +403,8 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 
 			//-------------------------------------------------------------- convert_timestamp_ago
 			if ($func=="convert_timestamp_ago"){
-				$oldcode=intval($code_part[0]);
-				$full=intval($code_part[1]);
+				$oldcode=floatval($code_part[0]);
+				$full=floatval($code_part[1]);
 				$y=substr($oldcode, 0, 4); //[2018]0218105347
 				$m=substr($oldcode, 4, 2); //[2018][02]18105347
 				$d=substr($oldcode, 6, 2); //[2018][02][18]105347
@@ -447,7 +447,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 
 			//-------------------------------------------------------------- covert_unix_timestamp
 			if ($func=="covert_unix_timestamp"){
-				return date('YmdHis',intval($code));
+				return date('YmdHis',floatval($code));
 			}
 
 			//-------------------------------------------------------------- TIMESTAMP
@@ -455,13 +455,13 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 				if ($code==""){
 					return date('YmdHis');
 				}else{
-					return date('YmdHis',time()+intval($code));
+					return date('YmdHis',time()+floatval($code));
 				}
 			}
 
 			//-------------------------------------------------------------- NUMBER_ROUND
 			if ($func=="number_round"){
-				return round(intval($code));
+				return round(floatval($code));
 			}
 
 			//-------------------------------------------------------------- string_brokenhtml
@@ -662,7 +662,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 				}
 
 				$sftp = ssh2_sftp($sftp_connections["".$sftp_table.""]);
-				$sftp_fd = intval($sftp);
+				$sftp_fd = floatval($sftp);
 				$sftp_path=ssh2_sftp_realpath($sftp,".");
 
 				$files=scandir("ssh2.sftp://$sftp_fd".$sftp_path."".$code_part[0]."");
@@ -693,7 +693,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 				}
 
 				$sftp = ssh2_sftp($sftp_connections["".$sftp_table.""]);
-				$sftp_fd = intval($sftp);
+				$sftp_fd = floatval($sftp);
 				$sftp_path=ssh2_sftp_realpath($sftp,".");
 
 				$dh=opendir("ssh2.sftp://$sftp_fd".$sftp_path."".$code_part[0]."");
@@ -731,7 +731,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 				}
 
 				$sftp = ssh2_sftp($sftp_connections["".$sftp_table.""]);
-				$sftp_fd = intval($sftp);
+				$sftp_fd = floatval($sftp);
 				$sftp_path=ssh2_sftp_realpath($sftp,".");
 
 				//$filesize = filesize("ssh2.sftp://$sftp_fd".$sftp_path."".$code_part[0]."");
@@ -761,7 +761,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 				}
 
 				$sftp = ssh2_sftp($sftp_connections["".$sftp_table.""]);
-				$sftp_fd = intval($sftp);
+				$sftp_fd = floatval($sftp);
 				$sftp_path=ssh2_sftp_realpath($sftp,".");
 
 				//$filesize = filesize("ssh2.sftp://$sftp_fd".$sftp_path."".$code_part[0]."");
@@ -800,7 +800,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 				}
 
 				$sftp = ssh2_sftp($sftp_connections["".$sftp_table.""]);
-				$sftp_fd = intval($sftp);
+				$sftp_fd = floatval($sftp);
 				$sftp_path=ssh2_sftp_realpath($sftp,".");
 
 				$contents = file_get_contents("ssh2.sftp://$sftp_fd".$sftp_path."".$code_part[0]."");
@@ -825,7 +825,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 				}
 
 				$sftp = ssh2_sftp($sftp_connections["".$sftp_table.""]);
-				$sftp_fd = intval($sftp);
+				$sftp_fd = floatval($sftp);
 				$sftp_path=ssh2_sftp_realpath($sftp,".");
 
 				$contents = mime_content_type("ssh2.sftp://$sftp_fd".$sftp_path."".$code_part[0]."");
@@ -850,7 +850,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 				}
 
 				$sftp = ssh2_sftp($sftp_connections["".$sftp_table.""]);
-				$sftp_fd = intval($sftp);
+				$sftp_fd = floatval($sftp);
 				$sftp_path=ssh2_sftp_realpath($sftp,".");
 
 				$content=file_get_contents($system["runpath"].$code_part[0]);
@@ -882,7 +882,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 				}
 
 				$sftp = ssh2_sftp($sftp_connections["".$sftp_table.""]);
-				$sftp_fd = intval($sftp);
+				$sftp_fd = floatval($sftp);
 				$sftp_path=ssh2_sftp_realpath($sftp,".");
 
 				$delete=ssh2_sftp_unlink($sftp,"".$sftp_path."".$code_part[0]."");
@@ -910,7 +910,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 				}
 
 				$sftp = ssh2_sftp($sftp_connections["".$sftp_table.""]);
-				$sftp_fd = intval($sftp);
+				$sftp_fd = floatval($sftp);
 				$sftp_path=ssh2_sftp_realpath($sftp,".");
 
 				$delete=ssh2_sftp_mkdir($sftp,"".$sftp_path."".$code_part[0]."");
@@ -938,7 +938,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 				}
 
 				$sftp = ssh2_sftp($sftp_connections["".$sftp_table.""]);
-				$sftp_fd = intval($sftp);
+				$sftp_fd = floatval($sftp);
 				$sftp_path=ssh2_sftp_realpath($sftp,".");
 
 				$delete=ssh2_sftp_rmdir($sftp,"".$sftp_path."".$code_part[0]."");
@@ -966,7 +966,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 				}
 
 				$sftp = ssh2_sftp($sftp_connections["".$sftp_table.""]);
-				$sftp_fd = intval($sftp);
+				$sftp_fd = floatval($sftp);
 				$sftp_path=ssh2_sftp_realpath($sftp,".");
 
 				$delete=ssh2_sftp_chmod($sftp,"".$sftp_path."".$code_part[0]."",$code_part[1]);
@@ -994,7 +994,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 				}
 
 				$sftp = ssh2_sftp($sftp_connections["".$sftp_table.""]);
-				$sftp_fd = intval($sftp);
+				$sftp_fd = floatval($sftp);
 				$sftp_path=ssh2_sftp_realpath($sftp,".");
 
 				$delete=ssh2_sftp_rename($sftp,"".$sftp_path."".$code_part[0]."","".$sftp_path."".$code_part[1]."");
@@ -1022,7 +1022,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 				}
 
 				$sftp = ssh2_sftp($sftp_connections["".$sftp_table.""]);
-				$sftp_fd = intval($sftp);
+				$sftp_fd = floatval($sftp);
 				$sftp_path=ssh2_sftp_realpath($sftp,".");
 
 				// Create new zip class
@@ -1397,7 +1397,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 
 			//-------------------------------------------------------------- NUMBER_ORDINAL
 			if ($func=="number_ordinal"){
-				$test_c = abs(intval($code)) % 10;
+				$test_c = abs(floatval($code)) % 10;
 		    $ext = ((abs($code) %100 < 21 && abs($code) %100 > 4) ? 'th'
 		            : (($test_c < 4) ? ($test_c < 3) ? ($test_c < 2) ? ($test_c < 1)
 		            ? 'th' : 'st' : 'nd' : 'rd' : 'th'));
@@ -1679,7 +1679,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 
 			//-------------------------------------------------------------- NUMBER_FORMAT
 			if ($func=="number_format"){
-				return number_format(intval($code));
+				return number_format(floatval($code));
 			}
 
 			//-------------------------------------------------------------- FILE_UPLOADED
@@ -1798,7 +1798,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 							$smallestSide = $width;
 						}
 						// copying the part into thumbnail
-						$thumbSize = intval($code_part[1]);
+						$thumbSize = floatval($code_part[1]);
 						$thumb = imagecreatetruecolor($thumbSize, $thumbSize);
 						$backgroundColor=imagecolorallocate($thumb, 255, 255, 255); imagefill($thumb, 0, 0, $backgroundColor);
 						imagecopyresampled($thumb, $im, 0, 0, $x, $y, $thumbSize, $thumbSize, $smallestSide, $smallestSide);
@@ -1878,7 +1878,7 @@ function ss_sys_function($id,$t,$process=false,$sandbox=false){
 						if ($newheight > $maxsize){ $newheightr=$maxsize; $math=$newheight/$newheightr; $newheight=$newheightr; $newwidth=$newwidth/$math; }
 
 						// scaling down the image
-						$thumbSize = intval($code_part[1]);
+						$thumbSize = floatval($code_part[1]);
 						$thumb = imagecreatetruecolor($newwidth, $newheight);
 						$backgroundColor=imagecolorallocate($thumb, 255, 255, 255); imagefill($thumb, 0, 0, $backgroundColor);
 						imagecopyresampled($thumb, $im, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
