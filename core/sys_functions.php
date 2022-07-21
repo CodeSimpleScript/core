@@ -2893,7 +2893,9 @@ function ss_sys_function_inputarray($id,$code,$process=false,$sandbox=false){
 	$code_part_on=0;
 	foreach ($match[1] as $splits){
 		$value=ss_code_variables_string_replace($id,$splits,$process,$sandbox);
-		$value=str_replace("\s"," ",$value);
+		if (is_array($value)==false){
+			$value=str_replace("\s"," ",$value);
+		}
 		$code_part[$code_part_on]=decode_makesafe_ss_input($value);
 		$code_part_on+=1;
 	}
