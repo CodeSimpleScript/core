@@ -641,7 +641,7 @@ function ss_run_linebyline_variable_math($id,$l,$tag,$scope,$sandbox=false){
 	if (checkpreg("/(\A|\r|\n|\r\n|\.|\_|\-|\!|\?|\s|\W)".$tag."\.([A-Za-z0-9\.\[\]_\-]*)\s*\+/i",$l)==true && $ran==false){ //--Check if variable add
 		$var=fetchpreg("/(\A|\r|\n|\r\n|\.|\_|\-|\!|\?|\s|\W)".$tag."\.([A-Za-z0-9\.\[\]_\- ]*)\+/i",$l);
 		$value=trim_clean(substr($l, strpos($l, "".$tag.".".$var."+") + strlen("".$tag.".".$var."+")));
-		$value=intval(ss_code_variables_get($scope,$var,false,$sandbox))+intval(ss_code_variables_string_replace($id,$value,true,$sandbox));
+		$value=floatval(ss_code_variables_get($scope,$var,false,$sandbox))+floatval(ss_code_variables_string_replace($id,$value,true,$sandbox));
 		ss_code_variables_save($scope,$var,$value,false,$sandbox);
 		$ran=true;
 	}
@@ -649,7 +649,7 @@ function ss_run_linebyline_variable_math($id,$l,$tag,$scope,$sandbox=false){
 	if (checkpreg("/(\A|\r|\n|\r\n|\.|\_|\-|\!|\?|\s|\W)".$tag."\.([A-Za-z0-9\.\[\]_\-]*)\s*-/i",$l)==true && $ran==false){ //--Check if variable take
 		$var=fetchpreg("/(\A|\r|\n|\r\n|\.|\_|\-|\!|\?|\s|\W)".$tag."\.([A-Za-z0-9\.\[\]_\- ]*)-/i",$l);
 		$value=trim_clean(substr($l, strpos($l, "".$tag.".".$var."-") + strlen("".$tag.".".$var."-")));
-		$value=intval(ss_code_variables_get($scope,$var,false,$sandbox))-intval(ss_code_variables_string_replace($id,$value,true,$sandbox));
+		$value=floatval(ss_code_variables_get($scope,$var,false,$sandbox))-floatval(ss_code_variables_string_replace($id,$value,true,$sandbox));
 		ss_code_variables_save($scope,$var,$value,false,$sandbox);
 		$ran=true;
 	}
@@ -657,7 +657,7 @@ function ss_run_linebyline_variable_math($id,$l,$tag,$scope,$sandbox=false){
 	if (checkpreg("/(\A|\r|\n|\r\n|\.|\_|\-|\!|\?|\s|\W)".$tag."\.([A-Za-z0-9\.\[\]_\-]*)\s*\//i",$l)==true && $ran==false){ //--Check if variable devide
 		$var=fetchpreg("/(\A|\r|\n|\r\n|\.|\_|\-|\!|\?|\s|\W)".$tag."\.([A-Za-z0-9\.\[\]_\- ]*)\//i",$l);
 		$value=trim_clean(substr($l, strpos($l, "".$tag.".".$var."/") + strlen("".$tag.".".$var."/")));
-		$value=intval(ss_code_variables_get($scope,$var,false,$sandbox))/intval(ss_code_variables_string_replace($id,$value,true,$sandbox));
+		$value=floatval(ss_code_variables_get($scope,$var,false,$sandbox))/floatval(ss_code_variables_string_replace($id,$value,true,$sandbox));
 		ss_code_variables_save($scope,$var,$value,false,$sandbox);
 		$ran=true;
 	}
@@ -665,7 +665,7 @@ function ss_run_linebyline_variable_math($id,$l,$tag,$scope,$sandbox=false){
 	if (checkpreg("/(\A|\r|\n|\r\n|\.|\_|\-|\!|\?|\s|\W)".$tag."\.([A-Za-z0-9\.\[\]_\-]*)\s*\*/i",$l)==true && $ran==false){ //--Check if variable multiply
 		$var=fetchpreg("/(\A|\r|\n|\r\n|\.|\_|\-|\!|\?|\s|\W)".$tag."\.([A-Za-z0-9\.\[\]_\- ]*)\*/i",$l);
 		$value=trim_clean(substr($l, strpos($l, "".$tag.".".$var."*") + strlen("".$tag.".".$var."*")));
-		$value=intval(ss_code_variables_get($scope,$var,false,$sandbox))*intval(ss_code_variables_string_replace($id,$value,true,$sandbox));
+		$value=floatval(ss_code_variables_get($scope,$var,false,$sandbox))*floatval(ss_code_variables_string_replace($id,$value,true,$sandbox));
 		ss_code_variables_save($scope,$var,$value,false,$sandbox);
 		$ran=true;
 	}
