@@ -1,1 +1,1 @@
-{ "message": "Added some new sandbox checks for current running file", "version": "0.5.61" }
+{ "message": "Updated system to support PHP8 fixing a few bugs related to arrays and number formating", "version": "0.5.71" }
