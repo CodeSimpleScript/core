@@ -26,7 +26,7 @@
 	}
 
 	function trim_clean($value){
-		if (is_array($d)==false){
+		if (is_array($value)==false){
 			//--Remove back slash from escaped quotes \"
 			$type=substr($value,0,1);
 			if ($type=="\"" OR $type=="'"){
@@ -58,7 +58,7 @@
 	}
 
 	function checkpreg($fetch,$data){
-		if (is_array($d)==false){
+		if (is_array($data)==false){
 			if (preg_match($fetch, $data, $var)){
 				return true;
 			}else{
