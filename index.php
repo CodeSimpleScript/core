@@ -11,27 +11,33 @@
 	}
 
 	function encode_makesafe_ss_input($d){
-		$d = str_replace(".","&period;",$d);
+		if (is_array($d)==false){
+			$d = str_replace(".","&period;",$d);
+		}
 		return $d;
 	}
 
 	function decode_makesafe_ss_input($d){
-		$d = str_replace("&period;",".",$d);
-		$d = str_replace("&amp;period;",".",$d); //--Markdown parser fix
+		if (is_array($d)==false){
+			$d = str_replace("&period;",".",$d);
+			$d = str_replace("&amp;period;",".",$d); //--Markdown parser fix
+		}
 		return $d;
 	}
 
 	function trim_clean($value){
-		//--Remove back slash from escaped quotes \"
-		$type=substr($value,0,1);
-		if ($type=="\"" OR $type=="'"){
-			$value=str_replace('\\'.$type,$type,$value);
-		}
+		if (is_array($d)==false){
+			//--Remove back slash from escaped quotes \"
+			$type=substr($value,0,1);
+			if ($type=="\"" OR $type=="'"){
+				$value=str_replace('\\'.$type,$type,$value);
+			}
 
-		if ($value!=" "){
-			$value=trim($value);
+			if ($value!=" "){
+				$value=trim($value);
+			}
+			$value = preg_replace('/^(\'(.*)\'|"(.*)")$/', '$2$3', $value);
 		}
-		$value = preg_replace('/^(\'(.*)\'|"(.*)")$/', '$2$3', $value);
 		return $value;
 	}
 
@@ -52,9 +58,7 @@
 	}
 
 	function checkpreg($fetch,$data){
-		if (is_array($data)){
-			return false;
-		}else{
+		if (is_array($d)==false){
 			if (preg_match($fetch, $data, $var)){
 				return true;
 			}else{
